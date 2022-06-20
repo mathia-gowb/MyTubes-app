@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Now playing</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://kit.fontawesome.com/26d2454a27.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="nav transparent-header">
+        <div class="logo"><span class="color">MY</span>TUBES</div>
+    </nav>
+    <main id="main-content-wrapper">
+        <section class="currently-playing">
+            <div id="now-playing">
+                <div class="video-player">
+                    <video src="./assets/videos/background-video.mp4" >
+                      
+                    </video>
+                    <div class="media-control"> 
+                        <div class="video-progress">
+                            <div></div>
+                        </div>
+                        <div id="playback-buttons">
+                            <div class="play-pause">
+                                <i class="fa-solid fa-circle-play fa-2x"></i>
+                                <!-- <i class="fa-solid fa-circle-pause fa-2x"></i> -->
+                            </div>
+                            <div class="volume-control">
+                                <i class="fa-solid fa-volume-high "></i>
+                               <!--  <i class="fa-solid fa-volume-low "></i> -->
+                              <!--  <i class="fa-solid fa-volume-xmark "></i> -->
+                                <input type="range" name="volume" id="volume">
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+                <h1 class="video-name">10 Reasons why trailer</h1>
+                <p class="upload-time">Uploaded 300 days ago</p>
+            </div>
+        </section> 
+
+        <section class="videos-list-wrapper">
+            <div class="videos-list">
+                <h2>Your videos</h2>
+                <br>
+                <div class="videos">
+                    <div class="video-wrapper">
+                        <div class="video">
+                            <video src="./assets/videos/background-video.mp4" mute loop></video>
+                            <button class="video-timeframe">15:20</button>
+                        </div>
+                        <div class="video-details">
+                            <h3 class="video-name">How to eat food that doesn't smell bad</h3>
+                            <p class="upload-time">10 days ago</p>
+                        </div>
+                    </div>
+                    <div class="video-wrapper">
+                        <div class="video">
+                            <video src="./assets/videos/background-video.mp4" mute loop></video>
+                            <button class="video-timeframe">15:20</button>
+                        </div>
+                        <div class="video-details">
+                            <h3 class="video-name">How to eat food that doesn't smell bad</h3>
+                            <p class="upload-time">10 days ago</p>
+                        </div>
+                    </div>
+                    <div class="video-wrapper">
+                        <div class="video">
+                            <video src="./assets/videos/background-video.mp4" mute loop></video>
+                            <button class="video-timeframe">15:20</button>
+                        </div>
+                        <div class="video-details">
+                            <h3 class="video-name">How to eat food that doesn't smell bad</h3>
+                            <p class="upload-time">10 days ago</p>
+                        </div>
+                    </div>
+                    <div class="video-wrapper">
+                        <div class="video">
+                            <video src="./assets/videos/background-video.mp4" mute loop></video>
+                            <button class="video-timeframe">15:20</button>
+                        </div>
+                        <div class="video-details">
+                            <h3 class="video-name">How to eat food that doesn't smell bad</h3>
+                            <p class="upload-time">10 days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="file-uploader">
+                <i class="fa-solid fa-angle-down"></i>
+                <div class="video preview video">
+                    <video src="./assets/videos/background-video.mp4" mute loop></video>
+                    <button class="video-timeframe">15:20</>
+                </div>
+                <!-- <input type="file" name="video" id="upload-video"> -->
+                <input type="text" name = "video-name" placeholder="Video Title">
+                <button id="save-button"><i class="fa-solid fa-cloud-arrow-up"></i> Save to cloud</button>
+            </div>
+            <div class="upload-button-wrapper">
+                <input type="file" name="video-uploader" id="video-uploader">
+                <button class="upload-button"><i class="fa-solid fa-upload"></i> upload videos</button>
+            </div>
+
+
+        </section>
+    </main>
+
+
+</body>
