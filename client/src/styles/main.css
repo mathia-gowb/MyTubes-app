@@ -98,7 +98,7 @@ video {
 Auth pages
 *********************************** */
 .auth-main-wrapper{
-    background-image:url('./assets/images/login-background.jpg');
+    background-image:url('../assets/images/login-background.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -292,6 +292,12 @@ end of videos page
 Media queries
 ****************************/
 
+@media (max-width:1300px){
+    .video-details{
+        margin-top:-20px;
+        margin-bottom:40px;
+    }
+}
 @media screen and (min-width:700px) {
     .hero-heading{
         width:85%;
@@ -333,6 +339,17 @@ Media queries
         bottom:0;
         right:0;
         margin-right:30px;
+    }
+}
+@media (min-width:1300px){
+    .video-wrapper{
+        display:flex;
+    }
+    .video,.video-details{
+        flex:1
+    }
+    .video-details{
+        margin-left:10px
     }
 }
 /*****************************
