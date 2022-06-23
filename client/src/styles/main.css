@@ -115,20 +115,10 @@ form{
     max-width:400px;
 }
 .validation-message{
-    color:rgb(227, 43, 43);
+    color:rgb(255, 55, 55);
     margin-top:8px;
 }
-@keyframes error-border {
-    0%{
-        outline:1px solid rgba(247, 44, 44, 0.575)
-    }
 
-}
-.incorrect input{
-    outline:3px solid rgb(255, 37, 37);
-    animation:error-border 0.5s  ease-in-out;
-    -webkit-animation:error-border 0.5s  ease-in-out;
-}
 input{
     border: none;
 }
