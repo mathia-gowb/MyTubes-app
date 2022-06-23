@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import FormInput from '../components/FormInput';
 import { testForErrors } from '../utilities/testForErrors';
@@ -85,7 +85,7 @@ function Login() {
         <br/>
         <br/>
         <input type="checkbox" name="remember-me" id="remember-me" onChange={handleCheck}/>{/* end of input */}
-        <label for="remember-me" id="remember-me-label"> Remember Me</label><br/>
+        <label htmlFor="remember-me" id="remember-me-label"> Remember Me</label><br/>
         <button className="auth-submit-button">
             {isSubmitting?<span> Aunthenticating <i className="fa-solid  fa-circle-notch fa-spin"></i></span>:"submit"}
            

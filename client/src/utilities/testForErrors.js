@@ -4,7 +4,8 @@ export function testForErrors(value,errorMessage,inputType,required){
     const regExps={
         email:/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
         /* Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character: */
-        password:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+        password:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        userName:/[^\w|\s]/gm
     }
 
     if(required && value.trim().length===0){
