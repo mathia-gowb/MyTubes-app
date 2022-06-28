@@ -7,21 +7,27 @@ function SignUp() {
     const [formErrors,setFormErrors] = useState({});
     const [isSubmitting,setIsSubmitting] = useState(false);
     const [formValues,setFormValues] = useState({
-        userName:'',
+        username:'',
         email:'',
         password:'',
         password2:'',
-        rememberUser:false,
+        remember:false,
     })
+    function comparePasswords(testPassword){
+        return formValues.password === testPassword
+    }
+    function handleInput({target}){
+        
+        let targetValue=target.name==="remember"?target.checked:target.value;
+        setFormValues((prev)=>{
+            return {...prev,[target.name]:targetValue }
+        }
+        )
+    }
     function handleSubmit(event){
         event.preventDefault();
         setSubmit(true);
         validate()
-    }
-    function handleCheck(){
-        setFormValues((prev)=>{
-            return {...prev,rememberUser:!prev.rememberUser}
-        })
     }
     
     function validate(){
@@ -35,7 +41,7 @@ function SignUp() {
             ),
             password:testForErrors(
                 formValues.password,
-                'Password must be strong',
+                'password between 8 to 15 characters which contain at least 1 lowercase letter, 1 uppercase letter, 1 numeric digit, and 1 special character',
                 'password',
                 'required'
             ),
@@ -52,63 +58,66 @@ function SignUp() {
                 'userName',
                 'required'
             )
-
+        }
+        if(!comparePasswords(formValues.password2)){
+            errors.password2="Passwords do not match"
         }
         setFormErrors((prev)=>{
-            return {
-                ...prev,
-                email:errors.email,
-                userName:errors.username,
-                password:errors.password,
-                password2:errors.password2
-            }
+            return {...prev,...errors }
         })
     }
+    function handlePasswordCompare({target}){
+        //for updating the validity of password 2 as the user types it
+            setFormErrors((prev)=>{
+                return {...prev,password2:!comparePasswords(target.value)?'Passwords do not match':"" }
+            })
+    }
+    
+    
     //submit form 
     useEffect(()=>{
         const objectValues=Object.values(formErrors).join("");
+        console.log(objectValues)
         if(objectValues.length===0 && submit){
             setIsSubmitting(true);
         }else{
             setIsSubmitting(false);
         }
-    },[formErrors])
+    },[formErrors,submit])
   return (
 
-    <main class="full-screen-div auth-main-wrapper" onSubmit={handleSubmit}>
+    <main class="full-screen-div auth-main-wrapper" >
         <div class="overlay"></div>
         <h1 class="auth-main-header">Create Account</h1>
-        <form>
+        <form onSubmit={handleSubmit} onChange={handleInput}>
              <FormInput
                  type={"email"}
                  placeholder={'Enter your email'}
                  name = {'email'}
                  errorMessage ={ formErrors.email}
-                 setFormValues = {setFormValues}
              />
              <FormInput
                  type={"text"}
                  placeholder={'Enter you name'}
                  name = {'username'}
                  errorMessage ={ formErrors.username}
-                 setFormValues = {setFormValues}
              />
             <FormInput
+                handleChange={handlePasswordCompare}
                 type={"password"}
                 placeholder={'Enter your password'}
                 name = {'password'}
                 errorMessage = { formErrors.password }//these message should be returned from backend
                 /*for signup errorMessage ={ "password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character"} */
-                setFormValues = {setFormValues}
             />
             <div className="input-wrapper">
-                <input  type="password" placeholder="Confirm Password" name="password2" />
+                <input  type="password" placeholder="Confirm Password" name="password2" onChange={handlePasswordCompare} />
                 <p className="validation-message">{formErrors.password2}</p>
             </div>
-            <input type="checkbox" name="remember-me" id="remember-me" onChange={handleCheck}/>{/* end of input */}
-            <label htmlFor="remember-me" id="remember-me-label"> Remember Me</label><br/>   
+            <input type="checkbox" name="remember" id="remember"/>{/* end of input */}
+            <label htmlFor="remember" id="remember-me-label"> Remember Me</label><br/>   
             <button class="auth-submit-button"> 
-                {isSubmitting?<span> Aunthenticating <i className="fa-solid  fa-circle-notch fa-spin"></i></span>:"Submit"}
+                {isSubmitting?<span> Creating Account <i className="fa-solid  fa-circle-notch fa-spin"></i></span>:"Submit"}
             </button>
         </form>
     </main>
