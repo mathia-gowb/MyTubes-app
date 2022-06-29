@@ -15,6 +15,8 @@ import { useState } from 'react';
 import Videos from './pages/Videos';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import VerificationNotice from './pages/VerificationNotice';
+
 
 function App() {
   const [loggedIn,setLoggedIn]=useState(false)
@@ -24,6 +26,7 @@ function App() {
         <Routes>
           {/* check login status and display landing page or videos page */}
           <Route path='/' element={loggedIn?<Videos/>:<LandingPage/>}/>
+          <Route path='/signup/verification-message/:email' element={<VerificationNotice/>}/>
           <Route path='login' element={loggedIn?<Navigate to={'/'}/>:<Login/>}></Route>
           <Route path='signup' element={loggedIn?<Navigate to={'/'}/>:<SignUp/>}></Route>
         </Routes>

@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
 import { testForErrors } from '../utilities/testForErrors';
+import { useNavigate } from 'react-router-dom';
 const axios = require('axios').default
 
 function SignUp() {
+    const navigate = useNavigate();
     const [submit,setSubmit]=useState(false);
     const [formErrors,setFormErrors] = useState({});
     const [isSubmitting,setIsSubmitting] = useState(false);
@@ -89,7 +92,12 @@ function SignUp() {
                     password: formValues.password
                 }
             ).then((response)=>{
-                console.log(response)
+                console.log(response.data)
+                if(response.data.status === "PENDING"){
+                    //navigate to the notice screen
+                    
+                    navigate(`/signup/verification-message/${response.data.email}`)
+                }
             }).catch((error)=>{
                 console.log(error)
             })

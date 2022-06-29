@@ -25,7 +25,7 @@ function sendVerificationEmail(req,res,{email:userEmail,_id}){
         subject : "Verify Your email",
         html :`
         <h4>Verify your email and complete the signup process</h4>
-        <p>Link expires in 6 hours</p>
+        <p>This link expires in 6 hours</p>
         <p>click the following link to verify your email</p>
         <a href="${websiteUrl}/user/verify/${_id}/${uniqueString}/">click the following link to verify your email</a>
         `
@@ -44,7 +44,23 @@ function sendVerificationEmail(req,res,{email:userEmail,_id}){
         )
         newVerification.save()
         .then((result)=>{
-            
+            //send verification main using the mail options
+            mailTransporter
+            .sendMail(mailOptions)
+            .then(()=>{
+                res.json({
+                    status:'PENDING',
+                    message:'Verification email sent'
+                })
+            })
+            .catch(
+                (error)=>{
+                    res.json({
+                        status:'FAILED',
+                        message:'Verification email failed create account'
+                    })
+                }
+            )
         }).catch((error)=>{
             res.json({
                 status : 'Failed',
