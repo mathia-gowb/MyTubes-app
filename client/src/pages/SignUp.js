@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import FormInput from '../components/FormInput';
 import { testForErrors } from '../utilities/testForErrors';
+const axios = require('axios').default
 
 function SignUp() {
     const [submit,setSubmit]=useState(false);
@@ -80,6 +81,18 @@ function SignUp() {
         console.log(objectValues)
         if(objectValues.length===0 && submit){
             setIsSubmitting(true);
+            axios.post(
+                'http://localhost:5000/user/register'
+                ,{
+                    username : formValues.username,
+                    email: formValues.email,
+                    password: formValues.password
+                }
+            ).then((response)=>{
+                console.log(response)
+            }).catch((error)=>{
+                console.log(error)
+            })
         }else{
             setIsSubmitting(false);
         }
