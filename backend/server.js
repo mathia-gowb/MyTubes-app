@@ -14,7 +14,7 @@ const PORT = 5000;
 
 //mongoose connnection
 /* Connect to mongoDb */
-mongoose.connect('mongodb://localhost/chatapp');
+mongoose.connect('mongodb://localhost/myTubes');
 mongoose.connection.once('open',function(){
     console.log('connected to the database');
 }).on('error',function(error){
