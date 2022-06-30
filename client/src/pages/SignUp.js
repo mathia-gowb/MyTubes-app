@@ -95,7 +95,6 @@ function SignUp() {
                 console.log(response.data)
                 if(response.data.status === "PENDING"){
                     //navigate to the notice screen
-                    
                     navigate(`/signup/verification-message/${response.data.email}`)
                 }
             }).catch((error)=>{

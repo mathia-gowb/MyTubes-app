@@ -1,10 +1,10 @@
 require ('dotenv').config();
-import { createTransport } from 'nodemailer';
-import { hash } from 'bcrypt';
+const  { createTransport } = require('nodemailer');
+const bcrypt = require('bcrypt');
 //user id string
-import { v4 as uuidv4 } from 'uuid';
+const { v4 : uuidv4 } = require('uuid');
 //validation model
-import UserVerification from '../models/userVerificationModel';
+const UserVerification =require('../models/userVerificationModel');
 //create node mailer transport
 const mailTransporter = createTransport({
     service : 'gmail',
@@ -16,8 +16,8 @@ const mailTransporter = createTransport({
 
 function sendVerificationEmail(req,res,{email:userEmail,_id}){
     //verification url
-    const websiteUrl = "http://localhost:3000/";
-    const uniqueString = uuidv4() + userId;
+    const websiteUrl = "http://localhost:3000";
+    const uniqueString = uuidv4() + _id;
         //mail options
     const mailOptions={
         from: process.env.AUTH_EMAIL,
@@ -32,7 +32,7 @@ function sendVerificationEmail(req,res,{email:userEmail,_id}){
     }
     const uniqueStringSaltRounds = 10;
     //hash unique string
-    hash(uniqueString,uniqueStringSaltRounds)
+    bcrypt.hash(uniqueString,uniqueStringSaltRounds)
     .then((hashedUniqueString)=>{
         //save the verification to database
         const newVerification = new UserVerification(
@@ -50,7 +50,8 @@ function sendVerificationEmail(req,res,{email:userEmail,_id}){
             .then(()=>{
                 res.json({
                     status:'PENDING',
-                    message:'Verification email sent'
+                    message:'Verification email sent',
+                    email:userEmail
                 })
             })
             .catch(
@@ -74,3 +75,5 @@ function sendVerificationEmail(req,res,{email:userEmail,_id}){
         })
     })
 }
+
+module.exports = sendVerificationEmail

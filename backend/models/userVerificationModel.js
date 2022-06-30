@@ -11,4 +11,4 @@ const userVerificationSchema = new Schema({
 
 
 const userVerificationModel = mongoose.model('user verification model', userVerificationSchema)
-module.export = userVerificationModel
+module.exports = userVerificationModel

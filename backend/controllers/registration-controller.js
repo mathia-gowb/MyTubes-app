@@ -11,7 +11,8 @@ const JsonResponse = require ('../helpers/jsonResponse');//return response objec
 const validationRegExps= require('../utils/validation-regexps');//contains regexps for validating inputs
 const User = require('../models/user-model');//user model
 const saltRounds =10;
-
+//send verification email function
+const sendVerificationEmail = require('./send-verification-email');
 function RegistrationController(req,res){
     const {password,username,email}=req.body;
     //back end validation for new user information
@@ -49,16 +50,12 @@ function RegistrationController(req,res){
                     newUser.save()
                     .then((result)=>{
                         //send verification email
-                        res.json(
-                            {
-                                status:'PENDING',
-                                message :'account created and is awaiting verification',
-                                email : result.email
-                            }
-                        )
+                        sendVerificationEmail(req,res,result)
                     }).catch((error)=>{
-                        res.json( 
-                            JsonResponse("FAILED","there was an error creating the account")
+                        console.log(error)
+                        res.json(
+                            //if sending of email was unsuccessful remove the user and restart the registration process 
+                            JsonResponse("FAILED","there was an sending verification email")
                         );
                     })
             
