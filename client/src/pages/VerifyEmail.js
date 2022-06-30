@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {useParams} from 'react-router-dom';
 const axios = require('axios').default
 
@@ -11,8 +11,11 @@ function VerifyEmail() {
                 uniqueString
             }
         )
-        .then()
+        .then((results)=>{
+            console.log(results)
+        })
     }
+
     return (
       <main class="full-screen-div auth-main-wrapper" >
           <div class="overlay"></div>
