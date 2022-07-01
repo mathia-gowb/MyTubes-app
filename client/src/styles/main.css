@@ -118,7 +118,11 @@ form{
     color:rgb(255, 55, 55);
     margin-top:8px;
 }
-
+.input-wrapper .form-error{
+    border : 2px solid rgb(255, 55, 55);
+    background-color:rgb(255, 189, 189) ;
+}
+.input-wrapper .form-error
 input{
     border: none;
 }

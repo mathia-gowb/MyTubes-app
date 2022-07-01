@@ -13,6 +13,9 @@ const verifyJWT = require('../controllers/verifyJWT');
 Router.post('/register',RegistrationController);
 Router.put('/verify',VerificationController)
 Router.post('/login',LoginController);
+Router.get('/login',(req,res)=>{
+    console.log(req.headers['authorization'])
+})//everytime the app is loaded it will send get request;
 Router.use(verifyJWT);
 //handling the upload,delete, and accessing of files
 

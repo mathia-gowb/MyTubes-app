@@ -11,16 +11,25 @@ import {
 } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import UserContext from './auth/AuthContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Videos from './pages/Videos';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import VerificationNotice from './pages/VerificationNotice';
 import VerifyEmail from './pages/VerifyEmail';
+const axios = require('axios').default;
+axios.defaults.withCredentials=true;
 
 
 function App() {
-  const [loggedIn,setLoggedIn]=useState(false)
+  const [loggedIn,setLoggedIn]=useState(false);
+  useEffect(()=>{
+    axios.get('http://localhost:5000/user/login')
+    .then((response)=>{
+      //set logged in status to true
+      console.log(response)
+    })
+  },[])
   return (
     <UserContext.Provider value={{loggedIn,setLoggedIn}}>
      <Router>

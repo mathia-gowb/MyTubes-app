@@ -1,11 +1,14 @@
-import  { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import  { useEffect, useState, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import UserContext from '../auth/AuthContext';
 import FormInput from '../components/FormInput';
 import { testForErrors } from '../utilities/testForErrors';
 const axios = require('axios').default;
 axios.defaults.withCredentials = true
 
 function Login() {
+    const navigate = useNavigate();
+    const {setLoggedIn} = useContext(UserContext);
     const [submit,setSubmit]=useState(false);
     const [formErrors,setFormErrors] = useState({});
     const [isSubmitting,setIsSubmitting] = useState(false);
@@ -59,9 +62,22 @@ function Login() {
                 rememberUser : formValues.remember
             })
             .then((results)=>{
-
+                //set login status to true
+                setLoggedIn(true);
+                navigate('/');
             }).catch((error)=>{
-                console.log(error)
+                const {status,data} =error.response
+                if(status === 401){
+                    console.log('yes')
+                    setFormErrors((prev)=>{
+                        return {...prev,password:data.message}
+                    })
+                }else if(status === 404){
+                    setFormErrors((prev)=>{
+                        return {...prev,email:data.message}
+                    })
+                }
+                
             })
         }else{
             setIsSubmitting(false);
@@ -93,7 +109,7 @@ function Login() {
         <br/>
         <br/>
         <input type="checkbox" name="remember" id="remember"/>{/* end of input */}
-        <label htmlFor="remember" id="remember-user-label"> Remember Me</label><br/>
+        <label htmlFor="remember" id="remember-me-label"> Remember Me</label><br/>
         <button className="auth-submit-button">
             {isSubmitting?<span> Aunthenticating <i className="fa-solid  fa-circle-notch fa-spin"></i></span>:"submit"}
            
