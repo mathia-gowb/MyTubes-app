@@ -5,10 +5,20 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const mongoose = require('mongoose');
 const app = express();
-
+//env
+require('dotenv').config();
 app.use(express.json())
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(session({
+    key:"userId",
+    secret:process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized : false,
+    cookie:{
+        expiry : 60*60*24
+    }
+}))
 require ('dotenv').config()
 const PORT = 5000;
 

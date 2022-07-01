@@ -6,6 +6,7 @@ const userVerificationSchema = new Schema({
     uniqueString : String,
     created : {type:Date,default:Date.now()},
     expires : Date,
+    rememberUser:{type:Boolean,default:false}
 
 })
 

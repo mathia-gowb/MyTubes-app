@@ -3,8 +3,8 @@ import { Navigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
 import { testForErrors } from '../utilities/testForErrors';
 import { useNavigate } from 'react-router-dom';
-const axios = require('axios').default
-
+const axios = require('axios').default;
+axios.defaults.withCredentials = true;
 function SignUp() {
     const navigate = useNavigate();
     const [submit,setSubmit]=useState(false);

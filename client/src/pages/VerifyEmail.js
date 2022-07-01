@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react'
-import {useParams} from 'react-router-dom';
-const axios = require('axios').default
+import React, { useContext } from 'react'
+import {useNavigate, useParams} from 'react-router-dom';
+import UserContext from '../auth/AuthContext';
+const axios = require('axios').default;
+axios.defaults.withCredentials = true;
 
 function VerifyEmail() {
     const {userId,uniqueString} = useParams();
+    const {setLoggedIn} = useContext(UserContext);
+    const navigate = useNavigate();
     function handleSubmit(){
         axios.put('http://localhost:5000/user/verify/',
             {
@@ -12,7 +16,11 @@ function VerifyEmail() {
             }
         )
         .then((results)=>{
-            console.log(results)
+            console.log(results.data.status)
+            if(results.data.status === 'SUCCESS'){
+                setLoggedIn(true);
+                navigate('/');
+            }
         })
     }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import backgroundVideo from '../assets/videos/background-video.mp4';
-
+const axios = require('axios').default;
+axios.defaults.withCredentials = true
 function Videos() {
   return (
     <main id="main-content-wrapper">

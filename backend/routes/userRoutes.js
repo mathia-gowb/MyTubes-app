@@ -7,9 +7,14 @@ const bcrypt = require('bcrypt');
 //creating of users
 const RegistrationController = require('../controllers/registration-controller');
 const VerificationController = require('../controllers/verification-controller');
+const LoginController = require('../controllers/login-controller');
+const verifyJWT = require('../controllers/verifyJWT');
 
 Router.post('/register',RegistrationController);
 Router.put('/verify',VerificationController)
+Router.post('/login',LoginController);
+Router.use(verifyJWT);
+//handling the upload,delete, and accessing of files
 
 
 module.exports = Router
