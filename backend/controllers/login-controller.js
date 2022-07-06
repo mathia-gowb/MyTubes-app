@@ -19,14 +19,25 @@ function LoginController(req,res){
 
                 if(passwordsMatch){
                     //create a jwt
-                    const token = jwt.sign({email},process.env.JWT_SECRET,
-                        {expiresIn : 300}
+                    const accessToken = jwt.sign({email},process.env.JWT_SECRET,
+                        {expiresIn :"10m"}
                     )
-                    const cookieAge = rememberUser?30*24*60*60*1000:24*60*60*1000//if remember me true keep cookie for 30-days
-                    res.cookie('JWT',token,{httpOnly:true,maxAge:cookieAge})
+                    const refreshToken = jwt.sign({email},process.env.JWT_REFRESH_TOKEN,{expiresIn:'1y'});
+
+                    res.cookie(
+                        'refreshToken',
+                        refreshToken,
+                        {
+                            httpOnly:true,
+                            maxAge:3.154e10, //1year
+                            secure:true
+                        }
+                    )
                     .json({
                         status : 'SUCCESS',
-                        message : 'login succesful'
+                        message : 'login succesful',
+                        accessToken
+
                     })
                 }else{
                     res.status(401)

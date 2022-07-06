@@ -8,7 +8,7 @@ axios.defaults.withCredentials = true
 
 function Login() {
     const navigate = useNavigate();
-    const {setLoggedIn} = useContext(UserContext);
+    const {setUser} = useContext(UserContext);
     const [submit,setSubmit]=useState(false);
     const [formErrors,setFormErrors] = useState({});
     const [isSubmitting,setIsSubmitting] = useState(false);
@@ -63,7 +63,11 @@ function Login() {
             })
             .then((results)=>{
                 //set login status to true
-                setLoggedIn(true);
+                console.log(results)
+                setUser({
+                    accessToken:results.data.accessToken,
+                    loggedIn:true
+                });
                 navigate('/');
             }).catch((error)=>{
                 const {status,data} =error.response

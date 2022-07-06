@@ -12,7 +12,7 @@ import {
 import LandingPage from './pages/LandingPage';
 import UserContext from './auth/AuthContext';
 import { useEffect, useState } from 'react';
-import Videos from './pages/Videos';
+import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import VerificationNotice from './pages/VerificationNotice';
@@ -22,24 +22,18 @@ axios.defaults.withCredentials=true;
 
 
 function App() {
-  const [loggedIn,setLoggedIn]=useState(false);
-  useEffect(()=>{
-    axios.get('http://localhost:5000/user/login')
-    .then((response)=>{
-      //set logged in status to true
-      console.log(response)
-    })
-  },[])
+  const [user,setUser]=useState(false);
   return (
-    <UserContext.Provider value={{loggedIn,setLoggedIn}}>
+    <UserContext.Provider value={{user,setUser}}>
      <Router>
         <Routes>
           {/* check login status and display landing page or videos page */}
-          <Route path='/' element={loggedIn?<Videos/>:<LandingPage/>}/>
+          <Route path='/' element={user.loggedIn?<Dashboard/>:<LandingPage/>}/>
           <Route path='/signup/verification-message/:email' element={<VerificationNotice/>}/>
           <Route path='/user/verify/:userId/:uniqueString' element={<VerifyEmail/>}/>
-          <Route path='login' element={loggedIn?<Navigate to={'/'}/>:<Login/>}></Route>
-          <Route path='signup' element={loggedIn?<Navigate to={'/'}/>:<SignUp/>}></Route>
+          <Route path='login' element={user.loggedIn?<Navigate to={'/'}/>:<Login/>}></Route>
+          <Route path='signup' element={user.loggedIn?<Navigate to={'/'}/>:<SignUp/>}></Route>
+          <Route path='demo' element={<Dashboard/>}></Route>
         </Routes>
       </Router>
     </UserContext.Provider>

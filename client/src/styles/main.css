@@ -16,8 +16,8 @@ button{
     border:none;
     cursor:pointer;
 }
-video {
-    max-width:100%
+img{
+    max-width: 100%;
 }
 .logo{
     color:white;
@@ -147,203 +147,224 @@ input[type="email"]{
 /* ****************
 End of Auth page
 ******************* */
+/* ***************************
+    receipes page
+***************************** */
 
-/* *********************
-Videos page
-********************* */
-
-.currently-playing{
-    background-color: rgb(32, 32, 32);
-}
-.videos-list-wrapper{
-    background-color: rgb(50, 50, 50);
-
-}
-.videos-list{
-    padding:50px 20px;
-}
-#now-playing{
-    padding: 80px 10px 20px
-}
-.video{
-    display:flex;
-    flex-direction: column;
-}
-.video-timeframe{
-    position:relative;
-    align-self:flex-end;
-    bottom:35px;
-    right:8px;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.855) ;
-    padding:5px;
+.nav-secondary button{
     color:white;
+    margin-right:5px;
+    background-color: #0b365a88;
+    padding:9px 20px;
+    border-radius:40px;
+    -webkit-border-radius:40px;
+    -moz-border-radius:40px;
+    -ms-border-radius:40px;
+    -o-border-radius:40px;
+}
+#recipes-content-wrapper{
+    background-color: #011627;
+    min-height:100vh;
+}
+
+
+.search-bar-wrapper{
+    margin-bottom:50px;
+}
+.search-bar{
+    background-color: #edeec9;
+    display:flex;
+    max-width:500px;
+    position:relative;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    -ms-border-radius:3px;
+    -o-border-radius:3px;
+    margin:auto;
+}
+.nav-secondary{
+    background-color: #0b375a;
+    padding:8px 20px;
+    width:80%;
+    margin-bottom:10px;
+}
+.nav-secondary .active-tab{
+    background-color: #0c3e67;
+}
+.recipes-section,.nav-secondary{
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 1200px;
+    margin-top:8px;
+    background-color: #041a2d;
+    border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
-.video-name{
-    color:white;
-    margin-top:15px;
+.recipes-section{
+    padding:20px;
 }
-.upload-time{
-    color:rgb(231, 73, 73);
+.recipes-section{
+    width:80%;
 }
-.video-player,.video-progress,#playback-buttons{
+.recipes-list{
+    display: grid;
+}
+.recent-recipes{
+    margin-top:20px;
+    grid-template-columns: repeat( 12, minmax(150px, 1fr) );
+    grid-gap:0 10px;
+
+}
+.recipe{
+    background:radial-gradient(rgba(0, 0, 0, 0.444),rgba(104, 104, 104, 0.183)) ;
+    border-radius:8px;
+    padding:4px;
+}
+.recipe-content{
+    
+    border-radius:8px;
+    overflow: hidden;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    -ms-border-radius:8px;
+    -o-border-radius:8px;
+}
+
+.recipe-content img{
+    transition:0.3s all;
+    cursor:pointer
+}
+.recipe-content:hover img{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+}
+.recipe-title{
+    padding:3px 4px;
+    color:#a7b0b7;
+    font-size:14px;
+}
+.interaction-bar,.interaction-bar button{
     display:flex;
 }
-.video-player{
-    flex-direction:column
-}
-.media-control{
-    box-sizing:border-box;
-    background:rgb(26, 25, 25)
-}
-.video-progress{
-    outline:1px solid rgba(0, 0, 0, 0.294);
-    background-color: white;
+.interaction-bar{
     width:100%;
-    cursor: pointer;
+    margin-top:-48px;;
+    padding:5px;;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    
 }
-.video-progress div{
-    background-color: rgb(234, 68, 68);
-    height: 10px;
-    width:80%
-}
-#playback-buttons{
-    padding:10px 20px  ;
-    height:100%;
+.interaction-bar button{
+    color:#ba181b;
+    border-radius:50%;
+    width:27px;
+    height: 27px;
+    background-color:white;
+    font-size:15px;
+    margin-left:4px;
+    justify-content: center;
     align-items: center;
-    color:rgb(236, 49, 49);
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    -ms-border-radius:50%;
+    -o-border-radius:50%;
+    box-shadow: 0px 0px 15px black;
 }
-.volume-control{
-    margin-left:20px;
+.random-recipes{
+    margin-top:20px;
+    grid-gap:1em
 }
-input[type='range']{
-    margin-left:8px;
-}
-.videos-list h2{
-    color:white;
-    font-size:20px
-}
-.file-uploader {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    position:fixed;
-    width:90%;
-    max-width:400px;
-    background-color: rgb(50, 50, 50);
-    box-shadow: 0px 0px 10px ;
-    padding:20px 15px 30px;
-    bottom:30px;
-    left:0;
-    right:0;
-    padding-bottom:30px;
-    margin:auto;
-}
-
-.file-uploader #save-button{
-    background-color: green;
-    color:white;
-    margin-top:5px;
-    padding:6px 20px;
-}
-.upload-button-wrapper{
-    position:fixed;
-    bottom:0;
-
-}
-#video-uploader{
-    position:absolute;
-    top:0;
-    left:0;
-}
-#video-uploader,.upload-button-wrapper{
-
-    width:100%;
-}
-.upload-button,#video-uploader{
-    width:100%;
-    padding:10px;
-}
-#video-uploader{
-    z-index:10;
-    opacity:0;
-}
-.upload-button{
-    font-weight: 500;
-    background-color: rgb(234, 68, 68);
-    color:white;
+.random-recipes .recipe-title{
+    margin-top:0px;
+    padding-top:0;
     font-size:18px;
-
+    font-weight: 500;
+    color:white;
 }
-/**********************
-end of videos page
-**********************/
-
+.random-recipes .categories{
+    margin-top:9px;
+    padding:3px 4px;
+    color:#a7b0b7;
+    font-size:14px;
+}
+.section-heading{
+    font-size:16px;
+    margin-bottom:8px;
+    color:#bee2ff
+}
+.search-bar-wrapper{
+    background-color:#ba181b ;
+    padding:15px 5px;
+}
+.search-bar input{
+    background-color: transparent;
+    outline:none;
+    border:none;
+    margin:0;
+    padding:10px 10px
+}
+.search-bar button{
+    background-color: transparent;
+    padding:5px 15px;
+    color:#ba181b
+}
+.tag-cloud{
+    max-width:700px
+}
+.tag-cloud button{
+    font-size:12px;
+    display:inline-block;
+    text-decoration: none;
+    color:white;
+    background-color: #0b375a;
+    padding:4px 14px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    margin-right: 3px;
+    margin-top:6px
+}
 /**************************
 Media queries
 ****************************/
 
-@media (max-width:1300px){
-    .video-details{
-        margin-top:-20px;
-        margin-bottom:40px;
+
+
+@media screen and (min-width:650px){
+    .random-recipes{
+        grid-template-columns: 1fr 1fr;
     }
 }
 @media screen and (min-width:700px) {
+
     .hero-heading{
         width:85%;
         font-size:50px;
     }
-    #main-content-wrapper{
-        display:flex;
-    }
-    .currently-playing,.videos-list-wrapper{
-        height:100vh
-    }
-    .videos-list-wrapper{
-        overflow-y: scroll;
-    }
-    .currently-playing{
-        flex:2;
-        padding:20px 40px;
-    }
-    .videos-list-wrapper{
-        flex:1;
-        padding:20px;
-    }
-    .file-uploader{
-        float:right;
-    }
-    .upload-button-wrapper{
-        top:0;
-        right:0;
-        width:200px;
-        height:50px;
-    }
-    .upload-button{
-        width:100%
-    }
-    .file-uploader {
-        background-color: rgb(50, 50, 50);
-        box-shadow: 0px 0px 10px ;
-        padding:20px 15px 30px;
-        bottom:0;
-        right:0;
-        margin-right:30px;
+   
+}
+@media  screen and (min-width:750px) {
+    .random-recipes{
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
-@media (min-width:1300px){
-    .video-wrapper{
-        display:flex;
+@media  screen and (min-width:1200px) {
+    .random-recipes{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
-    .video,.video-details{
-        flex:1
-    }
-    .video-details{
-        margin-left:10px
+}
+@media  screen and (min-width:1400px) {
+    .random-recipes{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
 }
 /*****************************

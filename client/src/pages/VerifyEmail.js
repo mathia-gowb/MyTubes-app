@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 function VerifyEmail() {
     const {userId,uniqueString} = useParams();
-    const {setLoggedIn} = useContext(UserContext);
+    const {setUser} = useContext(UserContext);
     const navigate = useNavigate();
     function handleSubmit(){
         axios.put('http://localhost:5000/user/verify/',
@@ -18,7 +18,10 @@ function VerifyEmail() {
         .then((results)=>{
             console.log(results.data.status)
             if(results.data.status === 'SUCCESS'){
-                setLoggedIn(true);
+                setUser({
+                    accessToken:results.data.accessToken,
+                    loggedIn:true
+                });
                 navigate('/');
             }
         })
