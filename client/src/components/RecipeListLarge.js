@@ -16,8 +16,8 @@ function RecipeListLarge(props) {
                         mealName ={meal.strMeal}
                         mealId={meal.idMeal}
                         mealCategory={category}
-                        liked={true}
-                        saved={true}
+                        liked={false}
+                        saved={false}
                         jsonData={meal}
                         />
              }
