@@ -12,6 +12,12 @@ general styles
 body{
     position:relative
 }
+ul{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+
 button{
     border:none;
     cursor:pointer;
@@ -215,8 +221,8 @@ End of Auth page
 }
 .recent-recipes{
     margin-top:20px;
-    grid-template-columns: repeat( 12, minmax(150px, 1fr) );
     grid-gap:0 10px;
+    overflow-x: scroll;
 
 }
 .recipe{
@@ -333,6 +339,70 @@ End of Auth page
     margin-right: 3px;
     margin-top:6px
 }
+/* ******************
+Single recipe page styling
+********************* */
+#meal-name,#meal-content{
+    width:80%;
+    max-width:1000px;
+    margin-left:auto;
+    margin-right:auto;
+}
+#meal-name{
+    color:white;
+    text-align: center;
+    padding-top:40px
+}
+#single-recipe-wrapper{
+    height:100vh;
+    background:linear-gradient(to top left,#011627,#0b375a);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+}
+
+#meal-content{
+    margin-top:50px;
+
+}
+#meal-content h2{
+    font-size:18px;
+    color:#bee2ff;
+    margin-bottom:10px;
+}
+#recipe-image img{
+    border-radius:8px;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    -ms-border-radius:8px;
+    -o-border-radius:8px;
+}
+#meal-info-wrapper{
+    padding:10px;
+    border-radius:8px;
+    background-color: #1c1c2275;
+}
+#instructions p,#ingredients li{
+    color:#a7b0b7;
+}
+#ingredients li{
+    background-color: #535b621a;
+    padding:5px 10px;
+    margin-top:5px;
+    border-radius:8px;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    -ms-border-radius:8px;
+    -o-border-radius:8px;
+}
+#ingredients{
+    color:#ba181b
+}
+
+/* **************
+end of single recipe page styling
+******************** */
+
 /**************************
 Media queries
 ****************************/
@@ -356,6 +426,33 @@ Media queries
     .random-recipes{
         grid-template-columns: 1fr 1fr 1fr;
     }
+}
+@media screen and (max-width:800px) {
+    #meal-info-wrapper{
+        margin-top:20px;
+    }
+}
+@media (min-width:600px){
+    #recipe-image button{
+        margin-right:10px;
+        transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+        -moz-transform: scale(1.3);
+        -ms-transform: scale(1.3);
+        -o-transform: scale(1.3);
+}
+}
+@media (min-width:800px){
+    #meal-info-wrapper{
+        padding:40px
+    }
+    #meal-content{
+        
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap:20px;
+    }
+
 }
 @media  screen and (min-width:1200px) {
     .random-recipes{

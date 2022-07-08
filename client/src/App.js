@@ -7,7 +7,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate
+  Navigate,
+  Outlet
 } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import UserContext from './auth/AuthContext';
@@ -17,6 +18,8 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import VerificationNotice from './pages/VerificationNotice';
 import VerifyEmail from './pages/VerifyEmail';
+import SingleRecipe from './pages/SingleRecipe';
+import DemoParent from './components/DemoParent';
 const axios = require('axios').default;
 axios.defaults.withCredentials=true;
 
@@ -33,7 +36,10 @@ function App() {
           <Route path='/user/verify/:userId/:uniqueString' element={<VerifyEmail/>}/>
           <Route path='login' element={user.loggedIn?<Navigate to={'/'}/>:<Login/>}></Route>
           <Route path='signup' element={user.loggedIn?<Navigate to={'/'}/>:<SignUp/>}></Route>
-          <Route path='demo' element={<Dashboard/>}></Route>
+          <Route path='demo' element={<DemoParent/>}>
+            <Route path='' element={<Dashboard/>}></Route>
+            <Route path='recipe/:mealId' element={<SingleRecipe/>}></Route>
+          </Route>
         </Routes>
       </Router>
     </UserContext.Provider>

@@ -17,9 +17,6 @@ Router.post('/login',LoginController);
 Router.get('/login',tokenLoginController)//everytime the app is loaded it will send get request;
 Router.use(verifyJWT);
 //handling the upload,delete, and accessing of files
-Router.get('/videos',(req,res)=>{
-
-})
 
 
 module.exports = Router

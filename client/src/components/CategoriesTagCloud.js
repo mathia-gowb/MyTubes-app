@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 const axios = require('axios');
 axios.defaults.withCredentials = false;
-function CategoriesTagCloud() {
-    const [categories,setCategories] = useState([])
+function CategoriesTagCloud(props) {
+    const [categoriesTags,setCategories] = useState(Array(5))
     useEffect(()=>{
         fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
         .then((results)=>results.json()
@@ -15,13 +15,13 @@ function CategoriesTagCloud() {
         })
     },[])
     function categoryClickHandler({target}){
-        console.log(target.id)
+        props.categorySetter(target.id)
     }
   return (
     <section className="recipes-section" id="recipes-categories">
     <h2 className='section-heading'>Explore by categories</h2>
     <div className='tag-cloud' onClick={categoryClickHandler}>
-        {categories}
+        {categoriesTags}
     </div>
   </section>
   )

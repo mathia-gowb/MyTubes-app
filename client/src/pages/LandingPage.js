@@ -9,7 +9,7 @@ function LandingPage() {
     </video>
     <div class="overlay"></div>
     <div class="hero-content">
-        <h1 class="hero-heading">SAVE AND VIEW YOUR FAVOURITE VIDEOS ONLINE</h1>
+        <h1 class="hero-heading">save your favourite recipes for your next meal</h1>
         <div class="auth-buttons">
           <p style={{width:"80%",maxWidth:"300px",color:"white",margin:"auto"}}>
             To view demo of this website without loging in press this 

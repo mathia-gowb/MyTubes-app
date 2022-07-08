@@ -30,8 +30,13 @@ app.use(cors(
         credentials:true
     }
 ))
-const UserRouter = require ('./routes/userRoutes')
-app.use('/user',UserRouter)
+const UserRouter = require ('./routes/userRoutes');
+const ContentRoutes = require('./routes/ContentRoutes');
+const verifyJWT = require('./controllers/verifyJWT');
+app.use('/user',UserRouter);
+//validation middleware
+app.use(verifyJWT);
+app.use('/recipes',ContentRoutes);
 
 app.listen(PORT,()=>{
     console.log(`server started on port ${PORT}`)

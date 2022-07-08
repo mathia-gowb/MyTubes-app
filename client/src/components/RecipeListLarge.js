@@ -12,10 +12,13 @@ function RecipeListLarge(props) {
             const {meals} = data;
             const mealsData=meals.map(meal=>{
                 return <RecipeLarge 
-                        imageSource={meal.strMealThumb}
+                        imgSrc={meal.strMealThumb}
                         mealName ={meal.strMeal}
                         mealId={meal.idMeal}
                         mealCategory={category}
+                        liked={true}
+                        saved={true}
+                        jsonData={meal}
                         />
              }
             )
@@ -23,11 +26,11 @@ function RecipeListLarge(props) {
         })
     },[category])
     return (
-      <section className="recipes-section">
-      <h2 className='section-heading'>Explore Recipes</h2>
-      <div className='recipes-list random-recipes'>
-      {mealsElements}
-    </div>
+    <section className="recipes-section">
+        <h2 className='section-heading'>Explore {category} Recipes</h2>
+        <div className='recipes-list random-recipes'>
+        {mealsElements}
+        </div>
     </section>
   )
 }
