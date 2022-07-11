@@ -4,6 +4,7 @@ import {Link, Outlet,useLocation} from 'react-router-dom'
 import CategoriesTagCloud from '../components/CategoriesTagCloud';
 import RecipeListLarge from '../components/RecipeListLarge';
 import UserContext from '../auth/AuthContext';
+import RandomUserRecipesContainer from '../components/RandomUserRecipes';
 const axios = require('axios').default;
 axios.defaults.withCredentials = true
 function Dashboard() {
@@ -12,17 +13,11 @@ function Dashboard() {
   const {pathname} = useLocation();
   const isDemo = /demo/gm.test(pathname);
   useEffect(()=>{
-    setUser({loggedIn:true})
-  },[])
-  useEffect(()=>{
-    //load the recipe from server on first login 
-    axios.get(`http://localhost:5000/recipes?isDemo=${isDemo}`)
-    .then((res)=>{
-      console.log(res)
-    }).catch((error)=>{
-      console.log(error)
+    setUser((prev)=>{
+      return {...prev,isDemo}
     })
   },[])
+
 
   return (
     <div className='page-wrapper'>
@@ -40,81 +35,9 @@ function Dashboard() {
           <button><i class="fa-regular fa-thumbs-up"></i> Liked (20)</button>
           <button> <i class="fa-regular fa-bookmark"></i> Saved (80) </button>
         </nav>
-        <section className="recipes-section">
-        <h2 className='section-heading'>Recently added recipes</h2>
-        <div className='recipes-list recent-recipes' style={{gridTemplateColumns:`repeat( ${5}, 150px`}}>
 
-          <div className='recipe'>
-            <div className='recipe-content'>
-              <img className='recipe-image-small' src={exampleImage} alt='food'/>
-              <div className='interaction-bar'>
-                <button className='add-to-favourites'>
-                 {/*  <i class="fa-solid fa-thumbs-up"></i> */}
-                  <i class="fa-regular fa-thumbs-up"></i>
-                </button>
-                
-                <button className='save'>
-                 {/*  <i class="fa-solid fa-bookmark"></i> */}
-                 <i class="fa-regular fa-bookmark"></i>
-                </button>
-              </div>
-            </div>
-            <p className='recipe-title'>Mashonja</p>
-          </div>
-          <div className='recipe'>
-            <div className='recipe-content'>
-              <img className='recipe-image-small' src={exampleImage} alt='food'/>
-              <div className='interaction-bar'>
-                <button className='add-to-favourites'>
-                 {/*  <i class="fa-solid fa-thumbs-up"></i> */}
-                  <i class="fa-regular fa-thumbs-up"></i>
-                </button>
-                
-                <button className='save'>
-                 {/*  <i class="fa-solid fa-bookmark"></i> */}
-                 <i class="fa-regular fa-bookmark"></i>
-                </button>
-              </div>
-            </div>
-            <p className='recipe-title'>Mashonja</p>
-          </div>
-          <div className='recipe'>
-            <div className='recipe-content'>
-              <img className='recipe-image-small' src={exampleImage} alt='food'/>
-              <div className='interaction-bar'>
-                <button className='add-to-favourites'>
-                 {/*  <i class="fa-solid fa-thumbs-up"></i> */}
-                  <i class="fa-regular fa-thumbs-up"></i>
-                </button>
-                
-                <button className='save'>
-                 {/*  <i class="fa-solid fa-bookmark"></i> */}
-                 <i class="fa-regular fa-bookmark"></i>
-                </button>
-              </div>
-            </div>
-            <p className='recipe-title'>Mashonja</p>
-          </div>
-          <div className='recipe'>
-            <div className='recipe-content'>
-              <img className='recipe-image-small' src={exampleImage} alt='food'/>
-              <div className='interaction-bar'>
-                <button className='add-to-favourites'>
-                 {/*  <i class="fa-solid fa-thumbs-up"></i> */}
-                  <i class="fa-regular fa-thumbs-up"></i>
-                </button>
-                
-                <button className='save'>
-                 {/*  <i class="fa-solid fa-bookmark"></i> */}
-                 <i class="fa-regular fa-bookmark"></i>
-                </button>
-              </div>
-            </div>
-            <p className='recipe-title'>Mashonja</p>
-          </div>
-        </div>
-        </section>
         <br/>
+        <RandomUserRecipesContainer/>
         <CategoriesTagCloud categorySetter = {setCurrentCategory}/>
         <RecipeListLarge
           category={currentCategory}

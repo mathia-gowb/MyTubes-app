@@ -1,6 +1,8 @@
 const Router = require('express').Router();
-const handleLikes = require('../controllers/handleLikes')
+const getAllRecipes = require('../controllers/get-all-recipes');
+const handleLikes = require('../controllers/handleLikes');
 //routes for handling likes
+Router.get('/',getAllRecipes)
 Router.get('/like',(req,res)=>{
     console.log(console.log(req))
 })

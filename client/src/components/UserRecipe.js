@@ -1,7 +1,7 @@
 import React from 'react'
 import InteractionBar from '../pages/InteractionBar'
 
-function RecentRecipe(props) {
+function UserRecipe(props) {
     const {liked,saved,mealId,mealName,imgSrc}=props
     return (
     <div className='recipe'>
@@ -20,4 +20,4 @@ function RecentRecipe(props) {
   )
 }
 
-export default RecentRecipe
+export default UserRecipe
