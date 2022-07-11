@@ -18,9 +18,8 @@ function VerifyEmail() {
         .then((results)=>{
             console.log(results.data.status)
             if(results.data.status === 'SUCCESS'){
-                setUser({
-                    accessToken:results.data.accessToken,
-                    loggedIn:true
+                setUser((prev)=>{
+                    return {...prev,accessToken:results.data.accessToken,loggedIn:true}
                 });
                 navigate('/');
             }

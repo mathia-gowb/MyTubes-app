@@ -30,6 +30,29 @@ app.use(cors(
         credentials:true
     }
 ))
+//create the demo user
+const userRecipes = require('./models/userRecipes-model');
+let demoCreated = false;
+if(!demoCreated){
+    //check if user with demo email aleady exists
+    userRecipes.find({userEmail:'demo@example.com'})
+    .then((results)=>{
+        if(!results.length){
+            const userRecipe =new userRecipes(
+                {
+                    userEmail:'demo@example.com'
+                }
+            )
+            userRecipe.save()
+            .then(()=>{
+                demoCreated =true;
+            }).catch((err)=>{
+                console.log(err)
+            }) 
+        }
+    })
+}
+
 const UserRouter = require ('./routes/userRoutes');
 const ContentRoutes = require('./routes/ContentRoutes');
 const verifyJWT = require('./controllers/verifyJWT');

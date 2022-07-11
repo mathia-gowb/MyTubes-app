@@ -64,9 +64,8 @@ function Login() {
             .then((results)=>{
                 //set login status to true
                 console.log(results)
-                setUser({
-                    accessToken:results.data.accessToken,
-                    loggedIn:true
+                setUser((prev)=>{
+                   return {...prev, accessToken:results.data.accessToken,loggedIn:true}
                 });
                 navigate('/');
             }).catch((error)=>{

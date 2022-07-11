@@ -1,20 +1,29 @@
 import exampleImage from '../assets/images/recipe-example.jpg';
-import {useEffect, useState} from 'react';
-import {Link, Outlet} from 'react-router-dom'
+import {useContext, useEffect, useState} from 'react';
+import {Link, Outlet,useLocation} from 'react-router-dom'
 import CategoriesTagCloud from '../components/CategoriesTagCloud';
 import RecipeListLarge from '../components/RecipeListLarge';
+import UserContext from '../auth/AuthContext';
 const axios = require('axios').default;
 axios.defaults.withCredentials = true
 function Dashboard() {
-  const [currentCategory,setCurrentCategory]=useState("Seafood");
+  const {user,setUser} = useContext(UserContext);
+  const [currentCategory,setCurrentCategory] = useState("Seafood");
+  const {pathname} = useLocation();
+  const isDemo = /demo/gm.test(pathname);
   useEffect(()=>{
-    axios.get('http://localhost:5000/recipes')
+    setUser({loggedIn:true})
+  },[])
+  useEffect(()=>{
+    //load the recipe from server on first login 
+    axios.get(`http://localhost:5000/recipes?isDemo=${isDemo}`)
     .then((res)=>{
       console.log(res)
     }).catch((error)=>{
       console.log(error)
     })
   },[])
+
   return (
     <div className='page-wrapper'>
       <div id="recipes-content-wrapper">

@@ -25,7 +25,7 @@ axios.defaults.withCredentials=true;
 
 
 function App() {
-  const [user,setUser]=useState(false);
+  const [user,setUser]=useState({loggedIn:false});
   return (
     <UserContext.Provider value={{user,setUser}}>
      <Router>

@@ -17,7 +17,8 @@ function InteractionBar(props) {
             })
         }else{
             console.log('ran ')
-            axios.post(`http://localhost:5000/recipes/like?id=${mealId}&isDemo=${isDemo}`)
+            axios.post(`http://localhost:5000/recipes/like?id=${mealId}&isDemo=${isDemo}`,
+            fullMealJson)
             .then((res)=>{
                 console.log(res)
             }).catch((err)=>{
@@ -35,7 +36,8 @@ function InteractionBar(props) {
                 console.log(error)
             })
         }else{
-            axios.post(`http://localhost:5000/recipes/save?id=${mealId}&isDemo=${isDemo}`)
+            axios.post(`http://localhost:5000/recipes/save?id=${mealId}&isDemo=${isDemo}`,
+            fullMealJson)
             .then((res)=>{
                 console.log(res)
             }).catch((err)=>{
