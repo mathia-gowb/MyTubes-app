@@ -3,7 +3,6 @@ function getAllRecipes(req,res){
 
     userRecipes.find({email:req.email})
     .then((results)=>{
-        console.log(results)
         const user = results[0];
         if(results.length){
             res.json(

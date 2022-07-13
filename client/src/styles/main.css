@@ -195,8 +195,8 @@ End of Auth page
     width:80%;
     margin-bottom:10px;
 }
-.nav-secondary .active-tab{
-    background-color: #0c3e67;
+.nav-secondary .active-tab,.active-category{
+    background-color: #1261a2!important;
 }
 .recipes-section,.nav-secondary{
     margin-left:auto;

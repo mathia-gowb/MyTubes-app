@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import InteractionBar from './InteractionBar'
+import InteractionBar from '../components/InteractionBar'
 
 function SingleRecipe() {
   useEffect(()=>{

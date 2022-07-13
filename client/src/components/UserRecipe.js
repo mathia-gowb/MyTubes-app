@@ -1,15 +1,14 @@
 import React from 'react'
-import InteractionBar from '../pages/InteractionBar'
+import InteractionBar from './InteractionBar'
 
 function UserRecipe(props) {
-    const {liked,saved,mealId,mealName,imgSrc}=props
+    const {mealId,mealName,imgSrc,fullMealJson}=props
     return (
     <div className='recipe'>
     <div className='recipe-content'>
         <img className='recipe-image-small' src={imgSrc} alt='food'/>
         <InteractionBar
-            liked = {liked}
-            saved = {saved}
+            fullMealJson = {fullMealJson}
             mealId = {mealId}
         />
     </div>

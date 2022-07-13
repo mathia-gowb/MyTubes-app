@@ -1,12 +1,14 @@
 import React from 'react'
 import {useContext, useEffect, useState} from 'react';
 import UserContext from '../auth/AuthContext';
+import RefreshTopBarContext from '../contexts/RefreshTopBarContext';
 import {createRandomUserRecipes} from '../helpers/createRandomUserRecipes'
 import UserRecipe from './UserRecipe';
 const axios = require('axios').default;
 
 function RandomUserRecipesContainer() {
     const {user,setUser} = useContext(UserContext);
+    const {refreshView} = useContext(RefreshTopBarContext);
     useEffect(()=>{
         //load the recipe from server on first login 
         axios.get(`http://localhost:5000/recipes?isDemo=${user.isDemo}`)
@@ -17,24 +19,22 @@ function RandomUserRecipesContainer() {
             return {...prev,likedRecipes,savedRecipes}
           })
         }).catch((error)=>{
-          console.log(error)
         })
       },[]);
-
+      
   return (
     <section className="recipes-section">
-    <h2 className='section-heading'>liked recipes</h2>
-    <div className='recipes-list recent-recipes' style={{gridTemplateColumns:`repeat( ${10}, 150px`}}>
+    <h2 className='section-heading'>Previously Interacted with</h2>
+    <div className='recipes-list recent-recipes' style={{gridTemplateColumns:`repeat( ${user.likedRecipes.length}, 150px`}}>
         {
           
-        createRandomUserRecipes(user.likedRecipes)
+        user.likedRecipes
         .map((recipe)=>{
-          console.log(user.likedRecipes)
           return ( 
             <UserRecipe
+              fullMealJson ={recipe}
               mealName = {recipe.strMeal}
-              liked = {true}
-              mealId = {recipe.mealId}
+              mealId = {recipe.idMeal}
               imgSrc = {recipe.strMealThumb}
             />
           )

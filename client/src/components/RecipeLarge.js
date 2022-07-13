@@ -1,10 +1,12 @@
-import React from 'react'
-import InteractionBar from '../pages/InteractionBar';
+
+
+import InteractionBar from './InteractionBar';
 
 function RecipeLarge(props) {
-    const {imgSrc,liked,saved,mealName,mealId,mealCategory,jsonData}=props;
+    const {imgSrc,key,liked,saved,mealName,mealId,mealCategory,jsonData}=props;
+    
   return (
-    <div className='recipe'>
+    <div className='recipe' key={key}>
     <div className='recipe-content'>
       <img className='recipe-image-small' src={imgSrc} alt='food'/>
       <InteractionBar
@@ -14,7 +16,7 @@ function RecipeLarge(props) {
           fullMealJson={jsonData}
       />
     </div>
-    <p className='categories'>Category | {mealCategory}</p>
+    {/* <p className='categories'>Category | {mealCategory}</p> */}
     <p className='recipe-title'>{mealName}</p>
   </div>
   )

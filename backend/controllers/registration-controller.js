@@ -52,7 +52,6 @@ function RegistrationController(req,res){
                         //send verification email
                         sendVerificationEmail(req,res,result)
                     }).catch((error)=>{
-                        console.log(error)
                         res.json(
                             //if sending of email was unsuccessful remove the user and restart the registration process 
                             JsonResponse("FAILED","there was an sending verification email")
@@ -67,7 +66,6 @@ function RegistrationController(req,res){
             }
 
         }).catch((error)=>{
-            console.log(error)
         })
 
     }

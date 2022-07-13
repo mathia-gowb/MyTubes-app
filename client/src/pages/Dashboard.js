@@ -1,15 +1,19 @@
-import exampleImage from '../assets/images/recipe-example.jpg';
+
 import {useContext, useEffect, useState} from 'react';
-import {Link, Outlet,useLocation} from 'react-router-dom'
-import CategoriesTagCloud from '../components/CategoriesTagCloud';
-import RecipeListLarge from '../components/RecipeListLarge';
+import {useLocation} from 'react-router-dom'
 import UserContext from '../auth/AuthContext';
-import RandomUserRecipesContainer from '../components/RandomUserRecipes';
+import RefreshTopBarContext from '../contexts/RefreshTopBarContext';
+import RandomRecipes from '../components/RandomRecipes';
+import LikedRecipes from '../components/LikedRecipes';
+import SavedRecipes from '../components/SavedRecipes';
 const axios = require('axios').default;
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
+
 function Dashboard() {
   const {user,setUser} = useContext(UserContext);
-  const [currentCategory,setCurrentCategory] = useState("Seafood");
+
+  const [currentTab,setCurrentTab] = useState("Random-Recipes");
+  const [refreshView,setRefreshView] = useState(false);
   const {pathname} = useLocation();
   const isDemo = /demo/gm.test(pathname);
   useEffect(()=>{
@@ -18,9 +22,9 @@ function Dashboard() {
     })
   },[])
 
-
   return (
-    <div className='page-wrapper'>
+    <RefreshTopBarContext.Provider value={{refreshView,setRefreshView}}>
+      <div className='page-wrapper'>
       <div id="recipes-content-wrapper">
         <nav className='search-bar-wrapper'>
           <div className='search-bar'>        
@@ -31,21 +35,27 @@ function Dashboard() {
         </nav>
 
         <nav className='nav-secondary'>
-          <button className="active-tab"><i class="fa-solid fa-shuffle"></i> Random recipes (20) </button>
-          <button><i class="fa-regular fa-thumbs-up"></i> Liked (20)</button>
-          <button> <i class="fa-regular fa-bookmark"></i> Saved (80) </button>
+          <button className={currentTab==='Random-Recipes'&&"active-tab"} onClick={()=>setCurrentTab('Random-Recipes')}>
+            <i class="fa-solid fa-shuffle"></i> Random recipes
+          </button>
+          <button className={currentTab==='Liked-Recipes'&&"active-tab"}  onClick={()=>setCurrentTab('Liked-Recipes')}>
+            <i class="fa-regular fa-thumbs-up"></i> Liked ({user.likedRecipes&&user.likedRecipes.length})
+          </button>
+          <button className={currentTab==='Saved-Recipes'&&"active-tab"} onClick={()=>setCurrentTab('Saved-Recipes')}> 
+            <i class="fa-regular fa-bookmark"></i> Saved ({user.likedRecipes&&user.savedRecipes.length}) 
+          </button>
         </nav>
-
         <br/>
-        <RandomUserRecipesContainer/>
-        <CategoriesTagCloud categorySetter = {setCurrentCategory}/>
-        <RecipeListLarge
-          category={currentCategory}
-        />
+      {/* tabs */}
+      {console.log(user)}
+      {currentTab==='Random-Recipes'&&<RandomRecipes/>}
+      {currentTab==='Liked-Recipes'&&<LikedRecipes/>}
+      {currentTab==='Saved-Recipes'&&<SavedRecipes/>}
 
       </div>
 
-    </div>
+      </div>
+    </RefreshTopBarContext.Provider>
   )
 }
 

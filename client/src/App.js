@@ -25,7 +25,13 @@ axios.defaults.withCredentials=true;
 
 
 function App() {
-  const [user,setUser]=useState({loggedIn:false});
+  const userSchema = {
+    loggedIn:false,
+    isDemo:false,
+    likedRecipes:[],
+    savedRecipes:[]
+  }
+  const [user,setUser]=useState(userSchema);
   return (
     <UserContext.Provider value={{user,setUser}}>
      <Router>
