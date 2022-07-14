@@ -13,6 +13,7 @@ function Dashboard() {
   const [currentTab,setCurrentTab] = useState("Random-Recipes");
   const {pathname} = useLocation();
   const isDemo = /demo/gm.test(pathname);
+  console.log(isDemo)
   useEffect(()=>{
     setUser((prev)=>{
       return {...prev,isDemo}

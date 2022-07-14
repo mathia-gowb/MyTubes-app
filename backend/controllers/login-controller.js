@@ -16,14 +16,14 @@ function LoginController(req,res){
         then((foundUser)=>{
             bcrypt.compare(password,foundUser.password)
             .then((passwordsMatch)=>{
-
+                
                 if(passwordsMatch){
                     //create a jwt
                     const accessToken = jwt.sign({email},process.env.JWT_SECRET,
                         {expiresIn :"10m"}
                     )
                     const refreshToken = jwt.sign({email},process.env.JWT_REFRESH_TOKEN,{expiresIn:'1y'});
-
+                
                     res.cookie(
                         'refreshToken',
                         refreshToken,

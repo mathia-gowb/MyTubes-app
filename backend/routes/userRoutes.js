@@ -11,10 +11,10 @@ const LoginController = require('../controllers/login-controller');
 const verifyJWT = require('../controllers/verifyJWT');
 const tokenLoginController = require('../controllers/token-login-controller');
 
+Router.get('/',tokenLoginController)//everytime the app is loaded it will send get request;
 Router.post('/register',RegistrationController);
 Router.put('/verify',VerificationController)
 Router.post('/login',LoginController);
-Router.get('/login',tokenLoginController)//everytime the app is loaded it will send get request;
 Router.use(verifyJWT);
 //handling the upload,delete, and accessing of files
 

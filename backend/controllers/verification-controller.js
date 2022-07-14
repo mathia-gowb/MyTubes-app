@@ -31,7 +31,7 @@ function verifyUser(req,res){
                         VerificationModel.deleteOne({userId:id})
                         .then(()=>{
                             //send the token and data to the frontend
-                            res.cookie('JWT',token,{httpOnly:true,maxAge:30*24*60*60*1000})
+                            res.cookie('refreshToken',token,{httpOnly:true,maxAge:30*24*60*60*1000})
                             .json(
                                 jsonResponse("SUCCESS","your account is now verified")
                             )

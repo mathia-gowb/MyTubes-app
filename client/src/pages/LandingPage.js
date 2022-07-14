@@ -1,8 +1,24 @@
-import React from 'react';
+import { useEffect,useContext } from 'react';
 import { Link } from 'react-router-dom';
-import backgroundVideo from '../assets/videos/background-video.mp4'
+import backgroundVideo from '../assets/videos/background-video.mp4';
+import UserContext from '../auth/AuthContext';
+const axios = require('axios').default;
+axios.defaults.withCredentials=true;
 
-function LandingPage() {
+function LandingPage(props) {
+  const {setUser} = useContext(UserContext);
+  useEffect(()=>{
+    //try to get current user
+    axios.get('http://localhost:5000/user')
+    .then((res)=>{
+      //if user found set the login status to true
+      if(res.data.status==='SUCCESSFUL'){
+        setUser((prev)=>{
+          return {...prev,loggedIn:true}
+        })
+      } 
+    })
+  },[])
   return (
     <main class="Landing-page full-screen-div">
     <video id="background-video"  src={backgroundVideo}  autoPlay loop muted  type="video/mp4">

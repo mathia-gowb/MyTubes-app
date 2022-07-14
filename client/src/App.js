@@ -19,8 +19,8 @@ import SignUp from './pages/SignUp';
 import VerificationNotice from './pages/VerificationNotice';
 import VerifyEmail from './pages/VerifyEmail';
 import SingleRecipe from './pages/SingleRecipe';
-import DemoParent from './components/DemoParent';
-import RefreshTopBarContext from './contexts/RefreshTopBarContext';
+import { RequireAuth } from './components/RequireAuth';
+import DashboardParent from './components/DashboardParent';
 const axios = require('axios').default;
 axios.defaults.withCredentials=true;
 
@@ -39,12 +39,16 @@ function App() {
      <Router>
         <Routes>
           {/* check login status and display landing page or videos page */}
-          <Route path='/' element={user.loggedIn?<Dashboard/>:<LandingPage/>}/>
+          {/* <Route path='/' element={<LandingPage/>}/> */}
+          <Route path='/' element={<RequireAuth><DashboardParent/></RequireAuth>}>
+            <Route path='' element={<Dashboard/>}></Route>
+            <Route path='recipe' element={<SingleRecipe/>}></Route>
+          </Route>
           <Route path='/signup/verification-message/:email' element={<VerificationNotice/>}/>
           <Route path='/user/verify/:userId/:uniqueString' element={<VerifyEmail/>}/>
           <Route path='login' element={user.loggedIn?<Navigate to={'/'}/>:<Login/>}></Route>
           <Route path='signup' element={user.loggedIn?<Navigate to={'/'}/>:<SignUp/>}></Route>
-          <Route path='demo' element={<DemoParent/>}>
+          <Route path='demo' element={<DashboardParent/>}>
             <Route path='' element={<Dashboard/>}></Route>
             <Route path='recipe' element={<SingleRecipe/>}></Route>
           </Route>

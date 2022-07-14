@@ -2,7 +2,7 @@ import{useState}from 'react'
 import { Outlet } from 'react-router-dom';
 import RefreshTopBarContext from '../contexts/RefreshTopBarContext';
 
-function DemoParent() {
+function DashboardParent() {
   const [refreshView,setRefreshView] = useState(false);
   return (
     <RefreshTopBarContext.Provider value={{refreshView,setRefreshView}}>
@@ -11,4 +11,4 @@ function DemoParent() {
   )
 }
 
-export default DemoParent
+export default DashboardParent

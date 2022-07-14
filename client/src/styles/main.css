@@ -6,6 +6,11 @@
 /* colors */
 /* pink = rgb(200, 53, 78) */
 /* end of colors */
+/* ***************
+fonts
+************************** */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');/* font-family: 'Poppins', sans-serif; */
+
 /* ************
 general styles
 ************** */
@@ -13,6 +18,7 @@ a{
     text-decoration: none;
 }
 body{
+    font-family: 'Poppins', sans-serif;
     position:relative
 }
 ul{
@@ -349,16 +355,36 @@ End of Auth page
 /* ******************
 Single recipe page styling
 ********************* */
-#meal-name,#meal-content{
-    width:80%;
-    max-width:1000px;
-    margin-left:auto;
-    margin-right:auto;
+#meal-content {
+    width:85%;
+    margin:auto;
+    max-width:800px
+}
+
+.main-text{
+    margin-left:10px
+}
+.main-text .cap{
+    font-size:14px;
+    color:white;
+    font-weight:bold;
+}
+
+.main-text .cap-info{
+    font-size:12px;
+    color:#bee2ff;
 }
 #meal-name{
+    font-size:20px;
+    margin-top:20px;
+    margin-bottom:10px;
     color:white;
-    text-align: center;
-    padding-top:40px
+}
+.more-meal-info{
+    margin-top:5px;
+}
+.more-meal-info i{
+    color:#ba181b
 }
 #single-recipe-wrapper{
     height:100vh;
@@ -366,11 +392,10 @@ Single recipe page styling
     background-repeat: no-repeat;
     background-position: center;
     background-size:cover;
+    overflow-y: scroll;
 }
-
-#meal-content{
-    margin-top:50px;
-
+#meal-content {
+    padding: 30px 5px;
 }
 #meal-content h2{
     font-size:18px;
@@ -384,10 +409,13 @@ Single recipe page styling
     -ms-border-radius:8px;
     -o-border-radius:8px;
 }
-#meal-info-wrapper{
-    padding:10px;
-    border-radius:8px;
+#main-meal-info,#meal-info-wrapper{
+    padding:8px;
     background-color: #1c1c2275;
+    border-radius:8px;
+}
+#meal-info-wrapper{
+    margin-top: 20px;
 }
 #instructions p,#ingredients li{
     color:#a7b0b7;
@@ -415,11 +443,26 @@ Media queries
 ****************************/
 
 
+@media screen and (min-width:600px){
 
+}
 @media screen and (min-width:650px){
     .random-recipes{
         grid-template-columns: 1fr 1fr;
     }
+    #main-meal-info{
+        display:flex;
+    }
+    #recipe-image{
+        max-width:200px;
+    }
+    #meal-name{
+        font-size:26px;
+        margin-top:20px;
+        margin-bottom:10px;
+        color:white;
+    }
+
 }
 @media screen and (min-width:700px) {
 
@@ -453,13 +496,6 @@ Media queries
     #meal-info-wrapper{
         padding:40px
     }
-    #meal-content{
-        
-        display:grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap:20px;
-    }
-
 }
 @media  screen and (min-width:1200px) {
     .random-recipes{
