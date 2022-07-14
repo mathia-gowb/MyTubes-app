@@ -9,6 +9,9 @@
 /* ************
 general styles
 ************** */
+a{
+    text-decoration: none;
+}
 body{
     position:relative
 }
@@ -226,7 +229,8 @@ End of Auth page
 
 }
 .empty-user-recipes{
-    color:#1261a2
+    color:#1261a2;
+    height:150px;
 }
 .empty-user-recipes i{
     color:white;
@@ -259,8 +263,10 @@ End of Auth page
 }
 .recipe-title{
     padding:3px 4px;
-    color:#a7b0b7;
     font-size:14px;
+}
+.recipe-title a{
+    color:#a7b0b7;
 }
 .interaction-bar,.interaction-bar button{
     display:flex;
@@ -294,18 +300,13 @@ End of Auth page
     grid-gap:1em
 }
 .random-recipes .recipe-title{
-    margin-top:0px;
+    margin-top:6px;
     padding-top:0;
-    font-size:18px;
+    font-size:16px;
     font-weight: 500;
     color:white;
 }
-.random-recipes .categories{
-    margin-top:9px;
-    padding:3px 4px;
-    color:#a7b0b7;
-    font-size:14px;
-}
+
 .section-heading{
     font-size:16px;
     margin-bottom:8px;

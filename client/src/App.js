@@ -20,6 +20,7 @@ import VerificationNotice from './pages/VerificationNotice';
 import VerifyEmail from './pages/VerifyEmail';
 import SingleRecipe from './pages/SingleRecipe';
 import DemoParent from './components/DemoParent';
+import RefreshTopBarContext from './contexts/RefreshTopBarContext';
 const axios = require('axios').default;
 axios.defaults.withCredentials=true;
 
@@ -32,6 +33,7 @@ function App() {
     savedRecipes:[]
   }
   const [user,setUser]=useState(userSchema);
+  
   return (
     <UserContext.Provider value={{user,setUser}}>
      <Router>
@@ -44,7 +46,7 @@ function App() {
           <Route path='signup' element={user.loggedIn?<Navigate to={'/'}/>:<SignUp/>}></Route>
           <Route path='demo' element={<DemoParent/>}>
             <Route path='' element={<Dashboard/>}></Route>
-            <Route path='recipe/:mealId' element={<SingleRecipe/>}></Route>
+            <Route path='recipe' element={<SingleRecipe/>}></Route>
           </Route>
         </Routes>
       </Router>

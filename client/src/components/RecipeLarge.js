@@ -1,9 +1,10 @@
 
 
+import { Link } from 'react-router-dom';
 import InteractionBar from './InteractionBar';
 
 function RecipeLarge(props) {
-    const {imgSrc,key,liked,saved,mealName,mealId,mealCategory,jsonData}=props;
+    const {imgSrc,key,liked,saved,mealName,mealId,mealCategory,parentPath,jsonData}=props;
     
   return (
     <div className='recipe' key={key}>
@@ -16,8 +17,11 @@ function RecipeLarge(props) {
           fullMealJson={jsonData}
       />
     </div>
-    {/* <p className='categories'>Category | {mealCategory}</p> */}
-    <p className='recipe-title'>{mealName}</p>
+    <p className='recipe-title'>
+      <Link to={`${parentPath}/recipe?id=${mealId}`}>
+        {mealName}
+      </Link>
+    </p>
   </div>
   )
 }

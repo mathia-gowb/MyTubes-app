@@ -1,8 +1,6 @@
-
 import {useContext, useEffect, useState} from 'react';
 import {useLocation} from 'react-router-dom'
 import UserContext from '../auth/AuthContext';
-import RefreshTopBarContext from '../contexts/RefreshTopBarContext';
 import RandomRecipes from '../components/RandomRecipes';
 import LikedRecipes from '../components/LikedRecipes';
 import SavedRecipes from '../components/SavedRecipes';
@@ -13,7 +11,6 @@ function Dashboard() {
   const {user,setUser} = useContext(UserContext);
 
   const [currentTab,setCurrentTab] = useState("Random-Recipes");
-  const [refreshView,setRefreshView] = useState(false);
   const {pathname} = useLocation();
   const isDemo = /demo/gm.test(pathname);
   useEffect(()=>{
@@ -23,39 +20,36 @@ function Dashboard() {
   },[])
 
   return (
-    <RefreshTopBarContext.Provider value={{refreshView,setRefreshView}}>
       <div className='page-wrapper'>
-      <div id="recipes-content-wrapper">
-        <nav className='search-bar-wrapper'>
-          <div className='search-bar'>        
-            <input type='text' name="search" placeholder='Search Your Recipes'></input>
-            <button className='search-icon'><i class="fa-solid fa-magnifying-glass"></i></button>
-          </div>
+        <div id="recipes-content-wrapper">
+          <nav className='search-bar-wrapper'>
+            <div className='search-bar'>        
+              <input type='text' name="search" placeholder='Search Your Recipes'></input>
+              <button className='search-icon'><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
 
-        </nav>
+          </nav>
 
-        <nav className='nav-secondary'>
-          <button className={currentTab==='Random-Recipes'&&"active-tab"} onClick={()=>setCurrentTab('Random-Recipes')}>
-            <i class="fa-solid fa-shuffle"></i> Random recipes
-          </button>
-          <button className={currentTab==='Liked-Recipes'&&"active-tab"}  onClick={()=>setCurrentTab('Liked-Recipes')}>
-            <i class="fa-regular fa-thumbs-up"></i> Liked ({user.likedRecipes&&user.likedRecipes.length})
-          </button>
-          <button className={currentTab==='Saved-Recipes'&&"active-tab"} onClick={()=>setCurrentTab('Saved-Recipes')}> 
-            <i class="fa-regular fa-bookmark"></i> Saved ({user.likedRecipes&&user.savedRecipes.length}) 
-          </button>
-        </nav>
-        <br/>
-      {/* tabs */}
-      {console.log(user)}
-      {currentTab==='Random-Recipes'&&<RandomRecipes/>}
-      {currentTab==='Liked-Recipes'&&<LikedRecipes/>}
-      {currentTab==='Saved-Recipes'&&<SavedRecipes/>}
-
+          <nav className='nav-secondary'>
+            <button className={currentTab==='Random-Recipes'&&"active-tab"} onClick={()=>setCurrentTab('Random-Recipes')}>
+              <i class="fa-solid fa-shuffle"></i> Random recipes
+            </button>
+            <button className={currentTab==='Liked-Recipes'&&"active-tab"}  onClick={()=>setCurrentTab('Liked-Recipes')}>
+              <i class="fa-regular fa-thumbs-up"></i> Liked ({user.likedRecipes&&user.likedRecipes.length})
+            </button>
+            <button className={currentTab==='Saved-Recipes'&&"active-tab"} onClick={()=>setCurrentTab('Saved-Recipes')}> 
+              <i class="fa-regular fa-bookmark"></i> Saved ({user.likedRecipes&&user.savedRecipes.length}) 
+            </button>
+          </nav>
+          <br/>
+          {/* tabs */}
+          {console.log(user)}
+          {currentTab==='Random-Recipes'&&<RandomRecipes/>}
+          {currentTab==='Liked-Recipes'&&<LikedRecipes/>}
+          {currentTab==='Saved-Recipes'&&<SavedRecipes/>}
+        </div>
       </div>
 
-      </div>
-    </RefreshTopBarContext.Provider>
   )
 }
 

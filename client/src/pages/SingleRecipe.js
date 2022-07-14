@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react'
-import InteractionBar from '../components/InteractionBar'
+import { useEffect } from 'react';
+import InteractionBar from '../components/InteractionBar';
 
 function SingleRecipe() {
+  const search = window.location.search;
+  const urlParams = new URLSearchParams(search);
+  const mealId = urlParams.get('id')
+
   useEffect(()=>{
-    fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772')
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
     .then((res)=>res.json())
     .then((data)=>{
       console.log(data)
@@ -15,7 +19,12 @@ function SingleRecipe() {
       <div id='meal-content' className='info-block'>
         <div id="recipe-image">
           <img src="https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg" alt="food"></img>  
-          <InteractionBar/>
+          <InteractionBar
+                    liked = {true}
+                    saved = {false}
+                    mealId = {52772}
+                    fullMealJson={{a:'jkl'}}
+          />
         </div>
         <div id="meal-info-wrapper">
           <div id="ingredients">
