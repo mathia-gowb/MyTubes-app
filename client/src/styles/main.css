@@ -225,6 +225,12 @@ End of Auth page
     overflow-x: scroll;
 
 }
+.empty-user-recipes{
+    color:#1261a2
+}
+.empty-user-recipes i{
+    color:white;
+}
 .recipe{
     background:radial-gradient(rgba(0, 0, 0, 0.444),rgba(104, 104, 104, 0.183)) ;
     border-radius:8px;

@@ -3,6 +3,8 @@ import {useContext, useEffect, useState} from 'react';
 import UserContext from '../auth/AuthContext';
 import RefreshTopBarContext from '../contexts/RefreshTopBarContext';
 import {createRandomUserRecipes} from '../helpers/createRandomUserRecipes'
+import EmptyUserRecipeList from './EmptyUserRecipeList';
+import RecentRecipesList from './RecentRecipesList';
 import UserRecipe from './UserRecipe';
 const axios = require('axios').default;
 
@@ -21,26 +23,26 @@ function RandomUserRecipesContainer() {
         }).catch((error)=>{
         })
       },[]);
-      
+    const [userRecipes,setUserRecipes]=useState([]);
+
+    useEffect(()=>{
+      const recipes = user.likedRecipes.map((recipe)=>{
+        return ( 
+          <UserRecipe
+            fullMealJson ={recipe}
+            mealName = {recipe.strMeal}
+            mealId = {recipe.idMeal}
+            imgSrc = {recipe.strMealThumb}
+          />
+        )
+      })
+      setUserRecipes(recipes);
+    },[user.likedRecipes])
+
   return (
     <section className="recipes-section">
     <h2 className='section-heading'>Previously Interacted with</h2>
-    <div className='recipes-list recent-recipes' style={{gridTemplateColumns:`repeat( ${user.likedRecipes.length}, 150px`}}>
-        {
-          
-        user.likedRecipes
-        .map((recipe)=>{
-          return ( 
-            <UserRecipe
-              fullMealJson ={recipe}
-              mealName = {recipe.strMeal}
-              mealId = {recipe.idMeal}
-              imgSrc = {recipe.strMealThumb}
-            />
-          )
-        })
-        }
-    </div>
+      {userRecipes.length?<RecentRecipesList userRecipes={userRecipes}/>:<EmptyUserRecipeList role={"like"} fontAwesomeIconClass={"fa-thumbs-up"} />}
     </section>
   )
 }
