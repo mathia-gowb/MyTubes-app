@@ -14,40 +14,50 @@ function LoginController(req,res){
         //find user with that email
         User.findOne({email}).
         then((foundUser)=>{
-            bcrypt.compare(password,foundUser.password)
-            .then((passwordsMatch)=>{
-                
-                if(passwordsMatch){
-                    //create a jwt
-                    const accessToken = jwt.sign({email},process.env.JWT_SECRET,
-                        {expiresIn :"10m"}
-                    )
-                    const refreshToken = jwt.sign({email},process.env.JWT_REFRESH_TOKEN,{expiresIn:'1y'});
-                
-                    res.cookie(
-                        'refreshToken',
-                        refreshToken,
-                        {
-                            httpOnly:true,
-                            maxAge:3.154e10, //1year
-                            secure:true
-                        }
-                    )
-                    .json({
-                        status : 'SUCCESS',
-                        message : 'login succesful',
-                        accessToken
+            //use an if else to check if the found user is verified then compare password
+            if(foundUser.verified){
+                bcrypt.compare(password,foundUser.password)
+                .then((passwordsMatch)=>{
 
-                    })
-                }else{
-                    res.status(401)
-                    .json(
-                        {
-                          message: 'password/email do not match'
-                        }
-                    )
-                }
-            })
+                    if(passwordsMatch){
+
+                        //create a jwt
+                        const accessToken = jwt.sign({email},process.env.JWT_SECRET,
+                            {expiresIn :"10m"}
+                        )
+                        const refreshToken = jwt.sign({email},process.env.JWT_REFRESH_TOKEN,{expiresIn:'1y'});
+                    
+                        res.cookie(
+                            'refreshToken',
+                            refreshToken,
+                            {
+                                httpOnly:true,
+                                maxAge:3.154e10, //1year
+                                secure:true
+                            }
+                        )
+                        .json({
+                            status : 'SUCCESS',
+                            message : 'login succesful',
+                            accessToken
+    
+                        })
+                    }else{
+                        res.status(401)
+                        .json(
+                            {
+                              message: 'password/email do not match'
+                            }
+                        )
+                    }
+                })
+            }else{
+                res.status(202)
+                .json({
+                    message:'please verify your account'
+                })
+            }
+
         }).catch((error)=>{
             res.status(404)
             .json({

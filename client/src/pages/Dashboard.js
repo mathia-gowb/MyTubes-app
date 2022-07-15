@@ -11,15 +11,8 @@ function Dashboard() {
   const {user,setUser} = useContext(UserContext);
 
   const [currentTab,setCurrentTab] = useState("Random-Recipes");
-  const {pathname} = useLocation();
-  const isDemo = /demo/gm.test(pathname);
-  console.log(isDemo)
-  useEffect(()=>{
-    setUser((prev)=>{
-      return {...prev,isDemo}
-    })
-  },[])
 
+  
   return (
       <div className='page-wrapper'>
         <div id="recipes-content-wrapper">
@@ -44,7 +37,6 @@ function Dashboard() {
           </nav>
           <br/>
           {/* tabs */}
-          {console.log(user)}
           {currentTab==='Random-Recipes'&&<RandomRecipes/>}
           {currentTab==='Liked-Recipes'&&<LikedRecipes/>}
           {currentTab==='Saved-Recipes'&&<SavedRecipes/>}

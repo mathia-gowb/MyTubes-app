@@ -13,14 +13,15 @@ function RandomUserRecipesContainer() {
     const {user,setUser} = useContext(UserContext);
     const {refreshView} = useContext(RefreshTopBarContext);
     const {pathname} = useLocation();
+    const isDemo = /demo/gm.test(pathname);
     useEffect(()=>{
         //load the recipe from server on first login 
-        axios.get(`http://localhost:5000/recipes?isDemo=${user.isDemo}`)
+        axios.get(`http://localhost:5000/recipes?isDemo=${isDemo}`)
         .then((res)=>{
           const {likedRecipes,savedRecipes}=res.data;
           //save the recipes to the app context for reference
           setUser((prev)=>{
-            return {...prev,likedRecipes,savedRecipes}
+            return {...prev,likedRecipes,savedRecipes,isDemo}
           })
         }).catch((error)=>{
         })

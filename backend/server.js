@@ -31,19 +31,19 @@ app.use(cors(
     }
 ))
 //create the demo user
-const userRecipes = require('./models/userRecipes-model');
+const user= require('./models/user-model');
 let demoCreated = false;
 if(!demoCreated){
     //check if user with demo email aleady exists
-    userRecipes.find({userEmail:'demo@example.com'})
+    user.findOne({email:'demo@example.com'})
     .then((results)=>{
         if(!results.length){
-            const userRecipe =new userRecipes(
+            const newUser =new user(
                 {
-                    userEmail:'demo@example.com'
+                    email:'demo@example.com'
                 }
             )
-            userRecipe.save()
+            newUser.save()
             .then(()=>{
                 demoCreated =true;
             }).catch((err)=>{

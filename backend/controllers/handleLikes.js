@@ -17,10 +17,8 @@ function addLike(req,res){
 function deleteLike(req,res){
     const mealId=req.query.id;
     const reqBody = req.body;
-    console.log(`delete a meal with an id of ${mealId}`)
     userRecipes.findOneAndUpdate({userEmail:req.email},{$pull:{'likedRecipes':{idMeal:mealId}}},{returnOriginal:false})
     .then((results)=>{
-        console.log(results)
         //okay
         res.json({
             likedRecipes:results.likedRecipes
