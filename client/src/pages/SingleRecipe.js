@@ -1,23 +1,36 @@
 import { useEffect,useState,useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import UserContext from '../auth/AuthContext';
 import InteractionBar from '../components/InteractionBar';
+import extractIngredients from '../helpers/extractIngredients';
 
 function SingleRecipe() {
   const {user}=useContext(UserContext);
+  const navigate = useNavigate();
   const search = window.location.search;
   const urlParams = new URLSearchParams(search);
   const mealId = urlParams.get('id');
   const [meal,setMeal]=useState({}); 
-
+  const [ingredients,setIngredients] = useState([]);
+  
   useEffect(()=>{
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
     .then((res)=>res.json())
     .then((data)=>{
-      setMeal(data.meals[0])
+      if(data.meals){
+        setMeal(data.meals[0])
+      }else{
+        navigate('/404')
+      }
     })
   },[])
-  console.log(meal)
+  //sets ingredients when the meal result become available
+  useEffect(()=>{
+    setIngredients(extractIngredients(meal))
+  },[meal])
+  const ingredientsElements = ingredients.map((ingredient)=>{
+    return <li><i class="fa-solid fa-circle"></i> {ingredient}</li>
+  })
   return (
     <div id="single-recipe-wrapper">    
       <div id='meal-content' className='info-block'>
@@ -53,14 +66,7 @@ function SingleRecipe() {
           <div id="ingredients">
           <h2><i class="fa-solid fa-carrot"></i> Ingredients</h2>
           <ul>
-            <li><i class="fa-solid fa-circle"></i> 10 bags</li>
-            <li><i class="fa-solid fa-circle"></i> 10 bags</li>
-            <li><i class="fa-solid fa-circle"></i> 10 bags</li>
-            <li><i class="fa-solid fa-circle"></i> 10 bags</li>
-            <li><i class="fa-solid fa-circle"></i> 10 bags</li>
-            <li><i class="fa-solid fa-circle"></i> 10 bags</li>
-            <li><i class="fa-solid fa-circle"></i> 10 bags</li>
-            <li><i class="fa-solid fa-circle"></i> 10 bags</li>
+            {ingredientsElements}
           </ul>
           </div>
           <br></br>

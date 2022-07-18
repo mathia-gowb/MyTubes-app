@@ -4,26 +4,19 @@ import UserContext from '../auth/AuthContext';
 import RandomRecipes from '../components/RandomRecipes';
 import LikedRecipes from '../components/LikedRecipes';
 import SavedRecipes from '../components/SavedRecipes';
+import SolidHeader from '../components/SolidHeader';
 const axios = require('axios').default;
 axios.defaults.withCredentials = true;
 
 function Dashboard() {
+  
   const {user,setUser} = useContext(UserContext);
-
   const [currentTab,setCurrentTab] = useState("Random-Recipes");
 
-  
   return (
       <div className='page-wrapper'>
         <div id="recipes-content-wrapper">
-          <nav className='search-bar-wrapper'>
-            <div className='search-bar'>        
-              <input type='text' name="search" placeholder='Search Your Recipes'></input>
-              <button className='search-icon'><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-
-          </nav>
-
+          <SolidHeader showSearch={true}/>
           <nav className='nav-secondary'>
             <button className={currentTab==='Random-Recipes'&&"active-tab"} onClick={()=>setCurrentTab('Random-Recipes')}>
               <i class="fa-solid fa-shuffle"></i> Random recipes

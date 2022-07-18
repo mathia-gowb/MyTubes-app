@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: smooth;
+  }
 *,html{
     padding:0;
     margin:0;
@@ -165,7 +168,6 @@ End of Auth page
 /* ***************************
     receipes page
 ***************************** */
-
 .nav-secondary button{
     color:white;
     margin-right:5px;
@@ -181,22 +183,47 @@ End of Auth page
     background-color: #011627;
     min-height:100vh;
 }
-
-
-.search-bar-wrapper{
+#solid-header{
     margin-bottom:50px;
 }
+#logo{
+    float:left
+}
+#logout-button
+#solid-header nav{
+    overflow: hidden;
+}
+.search-bar-inner-wrapper{
+    position:relative;
+    max-width:500px;
+    margin:auto;
+}
+
 .search-bar{
     background-color: #edeec9;
     display:flex;
-    max-width:500px;
     position:relative;
     border-radius:3px;
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     -ms-border-radius:3px;
     -o-border-radius:3px;
-    margin:auto;
+}
+
+.search-results{
+    background-color: white;
+    margin-top:-1px;
+    width:100%;
+    box-sizing:border-box;
+    border-top:0.5px solid rgb(192, 192, 192);
+    position:absolute;
+    
+}
+.search-results p{
+    padding:6px 10px;
+    border-bottom:1px solid rgb(230, 230, 230);
+    font-size:15px;
+    color:gray
 }
 .nav-secondary{
     background-color: #0b375a;
@@ -228,12 +255,7 @@ End of Auth page
 .recipes-list{
     display: grid;
 }
-.recent-recipes{
-    margin-top:20px;
-    grid-gap:0 10px;
-    overflow-x: scroll;
 
-}
 .empty-user-recipes{
     color:#1261a2;
     height:150px;
@@ -266,6 +288,10 @@ End of Auth page
     -moz-transform: scale(1.1);
     -ms-transform: scale(1.1);
     -o-transform: scale(1.1);
+}
+.user-recipe .recipe-title{
+    margin-top:5px;
+    font-size:13px
 }
 .recipe-title{
     padding:3px 4px;
@@ -318,7 +344,7 @@ End of Auth page
     margin-bottom:8px;
     color:#bee2ff
 }
-.search-bar-wrapper{
+#solid-header{
     background-color:#ba181b ;
     padding:15px 5px;
 }
@@ -334,6 +360,7 @@ End of Auth page
     padding:5px 15px;
     color:#ba181b
 }
+
 .tag-cloud{
     max-width:700px
 }

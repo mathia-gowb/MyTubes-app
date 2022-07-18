@@ -3,10 +3,12 @@ import {useContext, useEffect, useState} from 'react';
 import { useLocation } from 'react-router-dom';
 import UserContext from '../auth/AuthContext';
 import RefreshTopBarContext from '../contexts/RefreshTopBarContext';
-import {createRandomUserRecipes} from '../helpers/createRandomUserRecipes'
+
+//components
 import EmptyUserRecipeList from './EmptyUserRecipeList';
 import RecentRecipesList from './RecentRecipesList';
 import UserRecipe from './UserRecipe';
+import { SwiperSlide} from "swiper/react";
 const axios = require('axios').default;
 
 function RandomUserRecipesContainer() {
@@ -14,6 +16,7 @@ function RandomUserRecipesContainer() {
     const {refreshView} = useContext(RefreshTopBarContext);
     const {pathname} = useLocation();
     const isDemo = /demo/gm.test(pathname);
+
     useEffect(()=>{
         //load the recipe from server on first login 
         axios.get(`http://localhost:5000/recipes?isDemo=${isDemo}`)
@@ -31,13 +34,15 @@ function RandomUserRecipesContainer() {
     useEffect(()=>{
       const recipes = user.likedRecipes.map((recipe)=>{
         return ( 
-          <UserRecipe
-            parentPath = {pathname}
-            fullMealJson ={recipe}
-            mealName = {recipe.strMeal}
-            mealId = {recipe.idMeal}
-            imgSrc = {recipe.strMealThumb}
-          />
+          <SwiperSlide>
+            <UserRecipe
+              parentPath = {pathname}
+              fullMealJson ={recipe}
+              mealName = {recipe.strMeal}
+              mealId = {recipe.idMeal}
+              imgSrc = {recipe.strMealThumb}
+            />
+          </SwiperSlide>
         )
       })
       setUserRecipes(recipes);

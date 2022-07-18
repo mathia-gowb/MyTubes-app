@@ -1,0 +1,19 @@
+.solidHeaderNav{
+    overflow: hidden;
+    max-width: 1500px;
+    margin:5px auto 15px;
+}
+.logOutButton{
+    padding:5px 15px;
+    float:right;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+.textLogo{
+    float:left;
+    color:white;
+    font-style: italic;
+}

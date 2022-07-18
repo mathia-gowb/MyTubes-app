@@ -3,10 +3,10 @@ import { Link, } from 'react-router-dom'
 import InteractionBar from './InteractionBar'
 
 function UserRecipe(props) {
-
     const {mealId,mealName,imgSrc,fullMealJson,parentPath}=props
+    console.log(parentPath)
     return (
-    <div className='recipe'>
+    <div className='user-recipe'>
     <div className='recipe-content'>
         <img className='recipe-image-small' src={imgSrc} alt='food'/>
         <InteractionBar
@@ -15,7 +15,7 @@ function UserRecipe(props) {
         />
     </div>
     <p className='recipe-title'>
-        <Link to={`${parentPath}/recipe?id=${mealId}`}>
+        <Link to={`recipe?id=${mealId}`}>
             {mealName}
         </Link>
     </p>
