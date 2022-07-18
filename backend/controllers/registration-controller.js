@@ -32,9 +32,9 @@ function RegistrationController(req,res){
         //if username & email & password are valid check if the user already exists
         User.findOne({email})
         .then((results)=>{
-
+            console.log(results)
             if(results){
-                res.json( 
+                res.status(409).json( 
                     JsonResponse('CONFLICT','a user with that email already exists')
                     );
             }else{

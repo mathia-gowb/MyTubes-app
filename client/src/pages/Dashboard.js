@@ -16,7 +16,7 @@ function Dashboard() {
   return (
       <div className='page-wrapper'>
         <div id="recipes-content-wrapper">
-          <SolidHeader showSearch={true}/>
+          <SolidHeader showSearch={true} isDemo={user.isDemo}/>
           <nav className='nav-secondary'>
             <button className={currentTab==='Random-Recipes'&&"active-tab"} onClick={()=>setCurrentTab('Random-Recipes')}>
               <i class="fa-solid fa-shuffle"></i> Random recipes

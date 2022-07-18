@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
 import { testForErrors } from '../utilities/testForErrors';
 import { useNavigate } from 'react-router-dom';
+import FormPasswordInput from '../components/FormPasswordInput';
 const axios = require('axios').default;
 axios.defaults.withCredentials = true;
 function SignUp() {
@@ -92,13 +93,19 @@ function SignUp() {
                     password: formValues.password
                 }
             ).then((response)=>{
-                console.log(response.data)
+
                 if(response.data.status === "PENDING"){
                     //navigate to the notice screen
                     navigate(`/signup/verification-message/${response.data.email}`)
                 }
             }).catch((error)=>{
-                console.log(error)
+                //if error is conflict
+                if(error.request.status === 409)
+                {
+                    setFormErrors((prev)=>{
+                        return {...prev,email:'a user with that email already exists'}
+                    })
+                }
             })
         }else{
             setIsSubmitting(false);
@@ -122,14 +129,15 @@ function SignUp() {
                  name = {'username'}
                  errorMessage ={ formErrors.username}
              />
-            <FormInput
-                handleChange={handlePasswordCompare}
+            <FormPasswordInput
+
                 type={"password"}
                 placeholder={'Enter your password'}
                 name = {'password'}
                 errorMessage = { formErrors.password }//these message should be returned from backend
                 /*for signup errorMessage ={ "password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character"} */
             />
+            
             <div className="input-wrapper">
                 <input  type="password" placeholder="Confirm Password" name="password2" onChange={handlePasswordCompare} />
                 <p className="validation-message">{formErrors.password2}</p>

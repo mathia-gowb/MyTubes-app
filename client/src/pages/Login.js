@@ -2,6 +2,7 @@ import  { useEffect, useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../auth/AuthContext';
 import FormInput from '../components/FormInput';
+import FormPasswordInput from '../components/FormPasswordInput';
 import { testForErrors } from '../utilities/testForErrors';
 const axios = require('axios').default;
 axios.defaults.withCredentials = true
@@ -99,9 +100,8 @@ function Login() {
             name = {'email'}
             errorMessage ={ formErrors.email}
         />
-        
-        <FormInput
-            type={"password"}
+     
+        <FormPasswordInput
             placeholder={'Enter your password'}
             name = {'password'}
             errorMessage = { formErrors.password }//these message should be returned from backend
