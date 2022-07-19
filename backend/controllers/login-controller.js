@@ -14,6 +14,7 @@ function LoginController(req,res){
         //find user with that email
         User.findOne({email}).
         then((foundUser)=>{
+            console.log(foundUser)
             //use an if else to check if the found user is verified then compare password
             if(foundUser.verified){
                 bcrypt.compare(password,foundUser.password)
@@ -52,8 +53,9 @@ function LoginController(req,res){
                     }
                 })
             }else{
-                res.status(202)
+                res.status(401)
                 .json({
+                    status:'UNVERIFIED_ACCOUNT',
                     message:'please verify your account'
                 })
             }

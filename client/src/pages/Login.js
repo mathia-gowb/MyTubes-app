@@ -11,7 +11,7 @@ function Login() {
     const navigate = useNavigate();
     const {setUser} = useContext(UserContext);
     const [submit,setSubmit]=useState(false);
-    const [formErrors,setFormErrors] = useState({});
+    const [formErrors,setFormErrors] = useState({verification:''});
     const [isSubmitting,setIsSubmitting] = useState(false);
     const [formValues,setFormValues] = useState({
         email:'',
@@ -64,15 +64,20 @@ function Login() {
             })
             .then((results)=>{
                 //set login status to true
-                console.log(results)
-                setUser((prev)=>{
-                   return {...prev, accessToken:results.data.accessToken,loggedIn:true}
-                });
-                navigate('/');
+                    setUser((prev)=>{
+                        return {...prev, accessToken:results.data.accessToken,loggedIn:true}
+                     });
+                     navigate('/');
+
             }).catch((error)=>{
-                const {status,data} =error.response
-                if(status === 401){
-                    console.log('yes')
+
+                const {status,data} =error.response;
+                if(status ===401 && data.status === 'UNVERIFIED_ACCOUNT'){
+                    setFormErrors((prev)=>{
+                        return {...prev,verification:'Account not verified, please check your email for verification steps'}
+                    })
+                }else if(status === 401){
+
                     setFormErrors((prev)=>{
                         return {...prev,password:data.message}
                     })
@@ -93,6 +98,7 @@ function Login() {
     <h1 className="auth-main-header">Login to your account</h1>
     <form onSubmit={handleSubmit} onChange={handleInput} >
         {/* each form input component has the functionality to self validate */}
+        {formErrors.verification&&<p style={{backgroundColor:'white',fontSize:'14px',padding:'5px',color:'red'}}>{formErrors.verification}</p>}
 
         <FormInput
             type={"email"}

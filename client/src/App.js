@@ -21,6 +21,7 @@ import VerifyEmail from './pages/VerifyEmail';
 import SingleRecipe from './pages/SingleRecipe';
 import { RequireAuth } from './components/RequireAuth';
 import DashboardParent from './components/DashboardParent';
+import Page404 from './pages/404';
 const axios = require('axios').default;
 axios.defaults.withCredentials=true;
 
@@ -52,6 +53,7 @@ function App() {
             <Route path='' element={<Dashboard/>}></Route>
             <Route path='recipe' element={<SingleRecipe/>}></Route>
           </Route>
+          <Route path="*" element={<Page404/>}></Route>
         </Routes>
       </Router>
     </UserContext.Provider>

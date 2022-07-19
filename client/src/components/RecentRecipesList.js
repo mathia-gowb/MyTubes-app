@@ -13,19 +13,36 @@ import {Navigation } from "swiper";
 
 function RecentRecipesList(props) {
     const {userRecipes }= props;
-    
+    const recipesLength = userRecipes.length
 /*     function handleClick(event){
       console.log(event.targetElement)
     } */
     return (
       <Swiper
-        style={{height:'auto'}}
-        slidesPerView={8}
-        spaceBetween={10}
         loop={false}
-
+        spaceBetween={10}
         navigation={true}
         modules={[Navigation]}
+        breakpoints={{
+          320:{
+            slidesPerView: recipesLength>1?1.2:1,//if more than 1 recipe show the a part of last recipe
+          },
+          550: {
+            slidesPerView: recipesLength>2?2.2:2,
+          },
+          720: {
+            slidesPerView: recipesLength>3?3.2:3,
+          },
+          1024: {
+            slidesPerView: recipesLength>5?5.2:5,
+          },
+          1200: {
+            slidesPerView: recipesLength>6?6.2:6,
+          },
+          1300: {
+            slidesPerView: recipesLength>7?7.2:7,
+          }
+        }}
         className="mySwiper"
       >
         {userRecipes}

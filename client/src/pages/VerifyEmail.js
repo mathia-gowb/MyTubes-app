@@ -16,12 +16,14 @@ function VerifyEmail() {
             }
         )
         .then((results)=>{
-            console.log(results.data.status)
+
             if(results.data.status === 'SUCCESS'){
                 setUser((prev)=>{
                     return {...prev,accessToken:results.data.accessToken,loggedIn:true}
                 });
                 navigate('/');
+            }else{
+                navigate('/signup')
             }
         })
     }

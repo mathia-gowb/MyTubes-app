@@ -1,6 +1,5 @@
 import { useEffect,useContext } from 'react';
 import { Link } from 'react-router-dom';
-import backgroundVideo from '../assets/videos/background-video.mp4';
 import UserContext from '../auth/AuthContext';
 const axios = require('axios').default;
 axios.defaults.withCredentials=true;
@@ -20,9 +19,7 @@ function LandingPage(props) {
     })
   },[])
   return (
-    <main class="Landing-page full-screen-div">
-    <video id="background-video"  src={backgroundVideo}  autoPlay loop muted  type="video/mp4">
-    </video>
+    <main class="landing-page full-screen-div">
     <div class="overlay"></div>
     <div class="hero-content">
         <h1 class="hero-heading">save your favourite recipes for your next meal</h1>
