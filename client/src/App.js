@@ -22,6 +22,7 @@ import SingleRecipe from './pages/SingleRecipe';
 import { RequireAuth } from './components/RequireAuth';
 import DashboardParent from './components/DashboardParent';
 import Page404 from './pages/404';
+import ResetPassword from './pages/ResetPassword';
 const axios = require('axios').default;
 axios.defaults.withCredentials=true;
 
@@ -49,6 +50,7 @@ function App() {
           <Route path='/user/verify/:userId/:uniqueString' element={<VerifyEmail/>}/>
           <Route path='login' element={user.loggedIn?<Navigate to={'/'}/>:<Login/>}></Route>
           <Route path='signup' element={user.loggedIn?<Navigate to={'/'}/>:<SignUp/>}></Route>
+          <Route path='reset' element={<ResetPassword/>}></Route>
           <Route path='demo' element={<DashboardParent/>}>
             <Route path='' element={<Dashboard/>}></Route>
             <Route path='recipe' element={<SingleRecipe/>}></Route>
