@@ -16,7 +16,7 @@ const mailTransporter = createTransport({
 
 function sendVerificationEmail(req,res,{email:userEmail,_id}){
     //verification url
-    const websiteUrl = "http://localhost:3000";
+    const websiteUrl = req.get('origin');
     const uniqueString = uuidv4() + _id;
         //mail options
     const mailOptions={
